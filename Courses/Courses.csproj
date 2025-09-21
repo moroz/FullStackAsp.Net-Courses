@@ -9,6 +9,7 @@
 
     <ItemGroup>
         <Protobuf Include="Protos\greet.proto" GrpcServices="Server"/>
+        <Protobuf Include="Protos\courses.proto" GrpcServices="Server"/>
     </ItemGroup>
 
     <ItemGroup>
@@ -26,10 +27,6 @@
         <Content Include="..\.dockerignore">
             <Link>.dockerignore</Link>
         </Content>
-    </ItemGroup>
-
-    <ItemGroup>
-        <Folder Include="Models\"/>
     </ItemGroup>
 
 </Project>

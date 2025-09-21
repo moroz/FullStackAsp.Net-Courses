@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+option csharp_namespace = "Courses";
+
+package courses;
+
+service CoursesApi {
+  rpc ListEvents (ListEventsRequest) returns (ListEventsResponse);
+}
+
+message ListEventsRequest {}
+
+message ListEventsResponse {
+  repeated Event events = 1;
+}
+
+message UUID {
+  string value = 1;
+}
+
+message Event {
+  UUID id = 1;
+  string title_en = 2;
+  optional string title_pl = 3;
+}
