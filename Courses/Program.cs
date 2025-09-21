@@ -1,9 +1,16 @@
+using Courses;
 using Courses.Services;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddGrpc();
+
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options
+        .UseNpgsql(builder.Configuration.GetConnectionString("AppDbContext"))
+        .UseSnakeCaseNamingConvention());
 
 var app = builder.Build();
 
