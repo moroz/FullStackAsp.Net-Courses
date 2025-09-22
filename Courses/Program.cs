@@ -1,4 +1,5 @@
 using Courses;
+using Courses.Repository;
 using Courses.Services;
 using Microsoft.EntityFrameworkCore;
 
@@ -6,6 +7,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddGrpc();
+
+builder.Services.AddScoped<IEventRepository, EventRepository>();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
     options

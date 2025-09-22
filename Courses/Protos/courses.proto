@@ -1,25 +1,44 @@
 syntax = "proto3";
 
-option csharp_namespace = "Courses";
+option csharp_namespace = "Courses.Grpc";
 
 package courses;
 
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+
+// The courses service definition
 service CoursesApi {
+  // Lists all events
   rpc ListEvents (ListEventsRequest) returns (ListEventsResponse);
 }
 
-message ListEventsRequest {}
-
-message ListEventsResponse {
-  repeated Event events = 1;
-}
-
+// UUID message for ID representation
 message UUID {
   string value = 1;
 }
 
+// Event representation
 message Event {
   UUID id = 1;
   string title_en = 2;
-  optional string title_pl = 3;
+  google.protobuf.StringValue title_pl = 3;
+  google.protobuf.Timestamp starts_at = 4;
+  google.protobuf.Timestamp ends_at = 5;
+  google.protobuf.Timestamp created_at = 6;
+  google.protobuf.Timestamp updated_at = 7;
+  string description_en = 8;
+  google.protobuf.StringValue description_pl = 9;
+  bool is_virtual = 10;
+  google.protobuf.StringValue venue = 11;
+}
+
+// Request for listing events
+message ListEventsRequest {
+  // Can add filters here if needed in the future
+}
+
+// Response containing the list of events
+message ListEventsResponse {
+  repeated Event events = 1;
 }

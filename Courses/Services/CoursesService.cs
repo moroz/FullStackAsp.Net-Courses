@@ -1,32 +1,46 @@
-using Google.Protobuf.Collections;
 using Grpc.Core;
+using Courses.Grpc;
+using Courses.Repository;
+using Google.Protobuf.WellKnownTypes;
 
 namespace Courses.Services;
 
-public class CoursesService(ILogger<GreeterService> logger) : CoursesApi.CoursesApiBase
+public class CoursesService(ILogger<GreeterService> logger, IEventRepository eventRepository) : CoursesApi.CoursesApiBase
 {
     private readonly ILogger<GreeterService> _logger = logger;
 
-    public override Task<ListEventsResponse> ListEvents(ListEventsRequest request, ServerCallContext context)
+    public override async Task<ListEventsResponse> ListEvents(ListEventsRequest request, ServerCallContext context)
     {
+        var events = await eventRepository.ListEvents();
         var list = new List<Event>();
-
-        list.Add(new Event
+        
+        foreach (var e in events)
         {
-            TitleEn = "Hello world!",
-            TitlePl = "Something",
-            Id = new UUID
+            list.Add(new Event
             {
-                Value = Guid.CreateVersion7().ToString(),
-            }
-        });
+                TitleEn = e.TitleEn,
+                TitlePl = e.TitlePl,
+                StartsAt = Timestamp.FromDateTime(e.StartsAt),
+                EndsAt = Timestamp.FromDateTime(e.EndsAt),
+                CreatedAt = Timestamp.FromDateTime(e.CreatedAt),
+                UpdatedAt = Timestamp.FromDateTime(e.UpdatedAt),
+                IsVirtual = e.IsVirtual,
+                DescriptionEn = e.DescriptionEn,
+                DescriptionPl = e.DescriptionPl,
+                Venue = e.Venue,
+                Id = new UUID
+                {
+                    Value = e.Id.ToString()
+                }
+            });
+        }
 
-        return Task.FromResult(new ListEventsResponse
+        return new ListEventsResponse
         {
             Events =
             {
                 list
             }
-        });
+        };
     }
 }
