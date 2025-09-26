@@ -3,7 +3,8 @@ using Courses.Grpc;
 
 namespace Courses.Tests;
 
-public class UnitTest1
+[Collection("integration")]
+public class UnitTest1(GlobalTestFixture fixture) : DbTestBase(fixture)
 {
     [Fact]
     public void Test1()
@@ -15,18 +16,14 @@ public class UnitTest1
     [Fact]
     public async Task Test_Setup()
     {
-        var factory = new CustomWebApplicationFactory();
-        var client = factory.CreateClient();
-        var response = await client.GetAsync("/");
+        var response = await HttpClient.GetAsync("/");
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
     }
 
     [Fact]
     public async Task Test_Grpc()
     {
-        var factory = new CustomWebApplicationFactory();
-        var client = factory.CreateApiClient();
-        var resp = await client.ListEventsAsync(new ListEventsRequest());
+        var resp = await ApiClient.ListEventsAsync(new ListEventsRequest());
         Assert.Empty(resp.Events);
     }
 }
