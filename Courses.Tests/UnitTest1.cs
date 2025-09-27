@@ -1,5 +1,6 @@
 ﻿using System.Net;
 using Courses.Grpc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Courses.Tests;
 
@@ -25,5 +26,14 @@ public class UnitTest1(GlobalTestFixture fixture) : DbTestBase(fixture)
     {
         var resp = await ApiClient.ListEventsAsync(new ListEventsRequest());
         Assert.Empty(resp.Events);
+    }
+
+    [Fact]
+    public async Task Test_Context()
+    {
+        using var scope = Fixture.Factory.Services.CreateScope();
+        var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+        var events = await db.Events.CountAsync();
+        Assert.Equal(0, events);
     }
 }

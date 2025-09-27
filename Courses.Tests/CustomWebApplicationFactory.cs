@@ -25,7 +25,7 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Program>
         var client = CreateDefaultClient();
         return GrpcChannel.ForAddress(client.BaseAddress!, new GrpcChannelOptions
         {
-            HttpClient = client,
+            HttpClient = client
         });
     }
 
