@@ -1,4 +1,6 @@
+using System.Net.Mime;
 using Courses;
+using Courses.Models;
 using Courses.Repository;
 using Courses.Services;
 using Microsoft.EntityFrameworkCore;
@@ -10,12 +12,28 @@ builder.Services.AddGrpc();
 
 builder.Services.AddScoped<IEventRepository, EventRepository>();
 
+async Task SeedAsync(DbContext db, bool b, CancellationToken cancellationToken) => await Seeds.Run((AppDbContext)db);
+
 builder.Services.AddDbContext<AppDbContext>(options =>
+{
     options
         .UseNpgsql(builder.Configuration.GetConnectionString("AppDbContext"))
-        .UseSnakeCaseNamingConvention());
+        .UseSnakeCaseNamingConvention()
+        .UseAsyncSeeding(SeedAsync);
+});
 
 var app = builder.Build();
+
+if (args.Contains("seed"))
+{
+    using (var scope = app.Services.CreateScope())
+    {
+        var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+        await Seeds.Run(db);
+    }
+
+    Environment.Exit(0);
+}
 
 // Configure the HTTP request pipeline.
 app.MapGrpcService<GreeterService>();

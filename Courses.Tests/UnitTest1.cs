@@ -22,7 +22,7 @@ public class UnitTest1(GlobalTestFixture fixture) : DbTestBase(fixture)
         await using var scope = Fixture.AsyncScope;
         var repo = scope.ServiceProvider.GetRequiredService<IEventRepository>();
         var actual = await repo.ListEvents();
-        Assert.Empty(actual);
+        Assert.NotEmpty(actual);
     }
 
     [Fact]
@@ -40,6 +40,6 @@ public class UnitTest1(GlobalTestFixture fixture) : DbTestBase(fixture)
         var channel = GrpcChannel.ForAddress(client.BaseAddress!, new GrpcChannelOptions { HttpClient = client, });
         var grpcClient = new CoursesApi.CoursesApiClient(channel);
         var actual = await grpcClient.ListEventsAsync(new ListEventsRequest());
-        Assert.Empty(actual.Events);
+        Assert.NotEmpty(actual.Events);
     }
 }

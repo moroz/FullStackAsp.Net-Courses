@@ -1,3 +1,4 @@
+using Courses.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
@@ -18,6 +19,7 @@ public class GlobalTestFixture : IAsyncLifetime
     {
         _factory = new WebApplicationFactory<Program>().WithWebHostBuilder(builder => builder.UseEnvironment("Test"));
         await MigrateDb();
+        await SeedDb();
     }
 
     public Task DisposeAsync()
@@ -30,5 +32,12 @@ public class GlobalTestFixture : IAsyncLifetime
         await using var scope = AsyncScope;
         var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
         await db.Database.MigrateAsync();
+    }
+
+    private async Task SeedDb()
+    {
+        await using var scope = AsyncScope;
+        var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+        await Seeds.Run(db);
     }
 }
