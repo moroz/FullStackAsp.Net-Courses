@@ -6,7 +6,7 @@ import { promisify } from "util";
 const ProtoPath = "../Courses/Protos/courses.proto";
 
 const packageDefinition = protoLoader.loadSync(ProtoPath, {
-	keepCase: true,
+	keepCase: false,
 	defaults: true,
 	oneofs: true,
 });

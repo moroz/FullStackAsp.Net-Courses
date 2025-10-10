@@ -32,7 +32,8 @@ public static class Seeds
                 EndsAt = DateTime.Parse("2025-10-26T11:30:00Z").ToUniversalTime(),
                 DescriptionEn =
                     "Dr. Sanjay Modi, former professor of Mumbai Homeopathic College. The webinar is organised in honorary cooperation with the Polish Homeopathic Society and the Polish Society of Homeopathic Doctors and Pharmacists.\n\nOctober 24-25 2025, Vienna House Easy By Wyndham Cracow ul. Przy Rondzie 2, Kraków, Poland.\n\nOnline mode will also available (through Zoom). The lectures will be held in English with consecutive translation to Polish.",
-                Venue = "Kraków, Poland"
+                Venue = "Kraków, Poland",
+                IsVirtual = true
             }
         };
 

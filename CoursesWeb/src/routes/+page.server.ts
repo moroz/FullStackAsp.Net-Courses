@@ -1,15 +1,11 @@
 import { CoursesApiClient } from "../api/client";
 import type { PageServerLoad } from "./$types";
 import { promisify } from "util";
+import { listEvents } from "../api/queries";
 
 export const load: PageServerLoad = async ({ params }) => {
-	const client = new CoursesApiClient();
-	const events = await promisify(client.client.listEvents).call(client.client, {});
-
+	const events = await listEvents();
 	return {
-		test: {
-			abc: 42,
-			events: JSON.parse(JSON.stringify(events)),
-		},
+		events,
 	};
 };

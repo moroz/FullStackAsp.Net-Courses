@@ -1,1 +1,6 @@
 @import 'tailwindcss';
+
+@theme {
+    --font-sans: "DM Sans", system-ui, sans-serif;
+    --color-primary: var(--color-blue-900);
+}
