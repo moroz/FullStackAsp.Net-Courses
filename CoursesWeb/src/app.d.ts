@@ -7,6 +7,7 @@ declare global {
 		// interface Error {}
 		interface Locals {
 			locale: LocaleCode;
+			session: Record<string, any>;
 		}
 		// interface PageData {}
 		// interface PageState {}
