@@ -1,5 +1,7 @@
 <script lang="ts">
 	import type { Event } from "@api/interfaces";
+	import { MapPin } from "lucide-svelte";
+
 	interface Props {
 		event: Event;
 	}
@@ -8,7 +10,10 @@
 </script>
 
 <article class="bg-slate-100 p-6">
-	<div class="flex">
+	<div
+		class="mb-2 inline-flex items-center gap-1 rounded-lg bg-primary px-2 py-1 font-semibold text-white"
+	>
+		<MapPin class="h-5 w-5" />
 		{#if event.venue && event.isVirtual}
 			<span>{event.venue} + Online</span>
 		{:else if event.venue}
@@ -17,5 +22,6 @@
 			<span>Online</span>
 		{/if}
 	</div>
+	<div class="text-primary"></div>
 	<h3 class="text-4xl font-bold text-primary">{event.titleEn}</h3>
 </article>

@@ -1,0 +1,38 @@
+{
+  "version": "5",
+  "redirects": {
+    "https://esm.sh/libsodium@^0.7.15?target=denonext": "https://esm.sh/libsodium@0.7.15?target=denonext"
+  },
+  "remote": {
+    "https://esm.sh/libsodium-wrappers@0.7.15": "4ddd05ae0630a7c9042a89a6967e711f618fa034b1d8694011508b9040fef12b",
+    "https://esm.sh/libsodium-wrappers@0.7.15/denonext/libsodium-wrappers.mjs": "0b44f1df5bee7b227dddf110eae3c372bb35ef0d18d97ff217ef06d823bbd9b5",
+    "https://esm.sh/libsodium@0.7.15/denonext/libsodium.mjs": "ceff6f4eb66d00d79e36be0e4f34b77569a2692bc570553c18265843a3daaa76",
+    "https://esm.sh/libsodium@0.7.15?target=denonext": "ae7695484207273b017ec409e2dc078991e2f79b03da20be3887d50845bb9af2"
+  },
+  "workspace": {
+    "packageJson": {
+      "dependencies": [
+        "npm:@grpc/grpc-js@^1.14.0",
+        "npm:@grpc/proto-loader@0.8",
+        "npm:@sveltejs/adapter-auto@6",
+        "npm:@sveltejs/kit@^2.22.0",
+        "npm:@sveltejs/vite-plugin-svelte@6",
+        "npm:@tailwindcss/vite@4",
+        "npm:@types/accept-language-parser@^1.5.8",
+        "npm:@types/libsodium-wrappers@~0.7.14",
+        "npm:accept-language-parser@^1.5.0",
+        "npm:libsodium-wrappers@~0.7.15",
+        "npm:lucide-svelte@0.545",
+        "npm:prettier-plugin-svelte@^3.3.3",
+        "npm:prettier-plugin-tailwindcss@~0.6.11",
+        "npm:prettier@^3.4.2",
+        "npm:svelte-check@4",
+        "npm:svelte@5",
+        "npm:sveltekit-i18n@^2.4.2",
+        "npm:tailwindcss@4",
+        "npm:typescript@5",
+        "npm:vite@^7.0.4"
+      ]
+    }
+  }
+}
