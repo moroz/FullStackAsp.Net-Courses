@@ -1,5 +1,13 @@
 <script lang="ts">
-	import { t } from "$lib/translations";
+	import LanguageSwitcher from "./language-switcher.svelte";
+	import { type LocaleCode, t } from "$lib/translations";
+
+	interface Props {
+		locale: LocaleCode;
+		pathname: string;
+	}
+
+	const { locale, pathname }: Props = $props();
 </script>
 
 <header class="fixed inset-0 bottom-[unset] z-10 h-18 bg-slate-100 text-black shadow">
@@ -7,6 +15,7 @@
 		<a href="/"><h1 class="text-4xl font-bold text-primary">Homeo sapiens</h1></a>
 		<nav>
 			<ul class="flex">
+				<li><LanguageSwitcher {locale} {pathname} /></li>
 				<li><a href="/events">{$t("common.header.nav.events")}</a></li>
 				<li><a href="/videos">{$t("common.header.nav.videos")}</a></li>
 				<li><a href="/dashboard">{$t("common.header.nav.my_products")}</a></li>
@@ -24,7 +33,7 @@
 		@apply h-full;
 	}
 
-	nav a {
+	nav :global(a) {
 		@apply inline-flex items-center px-4 text-lg font-semibold text-primary transition hover:bg-slate-200;
 	}
 </style>

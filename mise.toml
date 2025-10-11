@@ -1,0 +1,7 @@
+[tools]
+dotnet = "latest"
+node = "latest"
+pnpm = "latest"
+
+[env]
+PGDATABASE = "courses_dev"

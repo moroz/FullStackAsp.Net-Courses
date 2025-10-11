@@ -3,8 +3,9 @@
 	import favicon from "$lib/assets/favicon.svg";
 	import Header from "@components/header.svelte";
 	import Footer from "@components/footer.svelte";
+	import type { LayoutProps } from "./$types";
 
-	let { children } = $props();
+	let { children, data }: LayoutProps = $props();
 </script>
 
 <svelte:head>
@@ -18,7 +19,7 @@
 </svelte:head>
 
 <div class="flex min-h-screen flex-col">
-	<Header />
+	<Header {...data} />
 	<main class="flex-1 pt-20">
 		{@render children?.()}
 	</main>

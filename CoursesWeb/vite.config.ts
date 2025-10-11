@@ -5,11 +5,4 @@ import path from "path";
 
 export default defineConfig({
 	plugins: [tailwindcss(), sveltekit()],
-	resolve: {
-		alias: {
-			"@components": path.resolve(process.cwd(), "src/components"),
-			"@api": path.resolve(process.cwd(), "src/api"),
-			"@": path.resolve(process.cwd(), "src"),
-		},
-	},
 });

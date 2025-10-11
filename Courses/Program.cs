@@ -18,8 +18,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 {
     options
         .UseNpgsql(builder.Configuration.GetConnectionString("AppDbContext"))
-        .UseSnakeCaseNamingConvention()
-        .UseAsyncSeeding(SeedAsync);
+        .UseSnakeCaseNamingConvention();
 });
 
 var app = builder.Build();

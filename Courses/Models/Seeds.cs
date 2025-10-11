@@ -1,3 +1,4 @@
+using Isopoh.Cryptography.Argon2;
 using Microsoft.EntityFrameworkCore;
 
 namespace Courses.Models;
@@ -6,9 +7,8 @@ public static class Seeds
 {
     public static async Task Run(AppDbContext db)
     {
-        await using var transaction = await db.Database.BeginTransactionAsync();
-
         await db.Events.ExecuteDeleteAsync();
+        await db.Users.ExecuteDeleteAsync();
 
         var events = new List<Event>
         {
@@ -38,7 +38,17 @@ public static class Seeds
         };
 
         await db.Events.AddRangeAsync(events);
+
+        await db.Users.AddAsync(new User
+        {
+            Id = new Guid("0199d410-cbcd-7407-8cab-cca22fbf2e4d"),
+            Email = "hs@moroz.dev",
+            Country = "TW",
+            PasswordHash = Argon2.Hash("foobar"),
+            GivenName = "Karol",
+            FamilyName = "Moroz",
+        });
+
         await db.SaveChangesAsync();
-        await transaction.CommitAsync();
     }
 }

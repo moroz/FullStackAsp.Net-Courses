@@ -1,6 +1,7 @@
 import crypto from "node:crypto";
 import { decode, encode } from "cbor2";
 import sodium from "libsodium-wrappers";
+import type { Cookies } from "@sveltejs/kit";
 
 export const SessionCookieName = "_courses_session";
 
@@ -71,4 +72,10 @@ export async function maybeLoadSession<T extends any>(
 	} catch (e) {
 		return null;
 	}
+}
+
+// TODO: This spans concerns
+export async function saveSession<T extends any>(payload: T, cookies: Cookies): Promise<any> {
+	const cookie = await encodeAndSeal(payload);
+	cookies.set(SessionCookieName, cookie, { path: "/" });
 }
