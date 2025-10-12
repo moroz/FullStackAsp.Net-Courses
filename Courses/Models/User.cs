@@ -1,9 +1,11 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Net;
+using Microsoft.EntityFrameworkCore;
 
 namespace Courses.Models;
 
+[Index(nameof(Email), IsUnique = true)]
 public class User
 {
     public Guid Id { get; set; } = Guid.CreateVersion7();
@@ -30,4 +32,6 @@ public class User
 
     public DateTime? LastLoginAt { get; set; }
     public IPAddress? LastLoginIp { get; set; }
+
+    public virtual ICollection<UserToken>? UserTokens { get; set; }
 }

@@ -5,7 +5,7 @@ using Google.Protobuf.WellKnownTypes;
 
 namespace Courses.Services;
 
-public class CoursesService(ILogger<GreeterService> logger, IEventRepository eventRepository) : CoursesApi.CoursesApiBase
+public class CoursesService(ILogger<GreeterService> logger, EventRepository eventRepository) : CoursesApi.CoursesApiBase
 {
     private readonly ILogger<GreeterService> _logger = logger;
 
@@ -13,7 +13,7 @@ public class CoursesService(ILogger<GreeterService> logger, IEventRepository eve
     {
         var events = await eventRepository.ListEvents();
         var list = new List<Event>();
-        
+
         foreach (var e in events)
         {
             list.Add(new Event

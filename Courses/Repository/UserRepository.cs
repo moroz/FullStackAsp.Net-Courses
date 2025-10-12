@@ -4,13 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Courses.Repository;
 
-public interface IUserRepository
-{
-    Task<Models.User?> AuthenticateUserByEmailPassword(string email, string password);
-    Task<Models.User?> GetUserById(Guid id);
-}
-
-public class UserRepository(AppDbContext dbContext) : IUserRepository
+public class UserRepository(AppDbContext dbContext)
 {
     public async Task<User?> AuthenticateUserByEmailPassword(string email, string password)
     {

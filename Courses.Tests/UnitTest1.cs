@@ -20,7 +20,7 @@ public class UnitTest1(GlobalTestFixture fixture) : DbTestBase(fixture)
     public async Task Test_EventRepository()
     {
         await using var scope = Fixture.AsyncScope;
-        var repo = scope.ServiceProvider.GetRequiredService<IEventRepository>();
+        var repo = scope.ServiceProvider.GetRequiredService<EventRepository>();
         var actual = await repo.ListEvents();
         Assert.NotEmpty(actual);
     }

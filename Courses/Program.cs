@@ -10,8 +10,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddGrpc();
 
-builder.Services.AddScoped<IEventRepository, EventRepository>();
-builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<EventRepository>();
+builder.Services.AddScoped<UserRepository>();
+builder.Services.AddScoped<UserTokenRepository>();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
