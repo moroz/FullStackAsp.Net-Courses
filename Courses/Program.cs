@@ -11,8 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddGrpc();
 
 builder.Services.AddScoped<IEventRepository, EventRepository>();
-
-async Task SeedAsync(DbContext db, bool b, CancellationToken cancellationToken) => await Seeds.Run((AppDbContext)db);
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
