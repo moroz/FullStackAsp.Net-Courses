@@ -1,5 +1,5 @@
-using System.Net.Mime;
 using Courses;
+using Courses.Middleware;
 using Courses.Models;
 using Courses.Repository;
 using Courses.Services;
@@ -34,8 +34,9 @@ if (args.Contains("seed"))
     Environment.Exit(0);
 }
 
+app.UseMiddleware<AuthenticationMiddleware>();
+
 // Configure the HTTP request pipeline.
-app.MapGrpcService<GreeterService>();
 app.MapGrpcService<CoursesService>();
 app.MapGet("/",
     () =>

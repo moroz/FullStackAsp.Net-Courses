@@ -1,4 +1,6 @@
 using Courses.Grpc;
+using Courses.Repository;
+using Grpc.Core;
 using Microsoft.EntityFrameworkCore;
 
 namespace Courses.Tests.Api;
@@ -36,5 +38,24 @@ public class SignInTest(GlobalTestFixture fixture) : DbTestBase(fixture)
             Assert.Empty(result.AccessToken.ToByteArray());
             Assert.NotEmpty(result.Errors);
         }
+    }
+
+    [Fact]
+    public async Task Test_GetCurrentUser()
+    {
+        var user = await Factory.CreateUser();
+        Assert.NotNull(user);
+
+        var client = Fixture.ApiClient();
+        var repo = new UserTokenRepository(DbContext);
+        var token = await repo.IssueAccessTokenForUser(user);
+
+        var metadata = new Metadata
+        {
+            { "authorization", $"Bearer {Convert.ToBase64String(token.Token)}" }
+        };
+
+        var result = await client.GetCurrentUserAsync(new GetCurrentUserRequest(), new CallOptions(metadata));
+        Assert.NotNull(result.User);
     }
 }

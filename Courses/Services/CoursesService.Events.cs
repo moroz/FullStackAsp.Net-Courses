@@ -5,10 +5,10 @@ using Google.Protobuf.WellKnownTypes;
 
 namespace Courses.Services;
 
-public partial class CoursesService(ILogger<GreeterService> logger, AppDbContext dbContext)
+public partial class CoursesService(ILogger<CoursesService> logger, AppDbContext dbContext)
     : CoursesApi.CoursesApiBase
 {
-    private readonly ILogger<GreeterService> _logger = logger;
+    private readonly ILogger<CoursesService> _logger = logger;
 
     public override async Task<ListEventsResponse> ListEvents(ListEventsRequest request, ServerCallContext context)
     {

@@ -12,6 +12,7 @@ service CoursesApi {
   // Lists all events
   rpc ListEvents (ListEventsRequest) returns (ListEventsResponse);
   rpc SignInWithPassword (SignInWithPasswordRequest) returns (SignInResponse);
+  rpc GetCurrentUser (GetCurrentUserRequest) returns (GetCurrentUserResponse);
 }
 
 // UUID message for ID representation
@@ -58,4 +59,26 @@ message SignInResponse {
   bool success = 1;
   repeated ErrorMessage errors = 2;
   optional bytes access_token = 3;
+}
+
+message GetCurrentUserRequest {}
+
+message GetCurrentUserResponse {
+  optional User user = 1;
+}
+
+message User {
+  UUID id = 1;
+  string email = 2;
+  optional string salutation = 3;
+  string given_name = 4;
+  string family_name = 5;
+  optional string country = 6;
+  optional string profession = 7;
+  optional string organization = 8;
+  optional string company = 9;
+  google.protobuf.Timestamp created_at = 10;
+  google.protobuf.Timestamp updated_at = 11;
+  optional google.protobuf.Timestamp last_login_at = 12;
+  optional string last_login_ip = 13;
 }

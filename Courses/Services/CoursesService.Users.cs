@@ -1,6 +1,8 @@
 using Courses.Grpc;
+using Courses.Middleware;
 using Courses.Repository;
 using Google.Protobuf;
+using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 
 namespace Courses.Services;
@@ -37,5 +39,37 @@ public partial class CoursesService
             AccessToken = ByteString.CopyFrom(token.Token),
             Success = true,
         };
+    }
+
+    public override Task<GetCurrentUserResponse> GetCurrentUser(GetCurrentUserRequest request,
+        ServerCallContext context)
+    {
+        var userTokenRepository = new UserTokenRepository(dbContext);
+        var user = context.GetCurrentUser();
+
+        if (user == null)
+        {
+            return Task.FromResult(new GetCurrentUserResponse());
+        }
+
+        return Task.FromResult(new GetCurrentUserResponse
+        {
+            User = new User
+            {
+                Id = new UUID { Value = user.Id.ToString(), },
+                Email = user.Email,
+                Company = user.Company ?? "",
+                Country = user.Country ?? "",
+                CreatedAt = Timestamp.FromDateTime(user.CreatedAt),
+                FamilyName = user.FamilyName,
+                GivenName = user.GivenName,
+                LastLoginAt = user.LastLoginAt == null ? null : Timestamp.FromDateTime((DateTime)user.LastLoginAt),
+                LastLoginIp = user.LastLoginIp?.ToString() ?? "",
+                Organization = user.Organization ?? "",
+                Profession = user.Profession ?? "",
+                Salutation = user.Salutation ?? "",
+                UpdatedAt = Timestamp.FromDateTime(user.UpdatedAt)
+            }
+        });
     }
 }
