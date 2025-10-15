@@ -10,6 +10,7 @@ public abstract class DbTestBase(GlobalTestFixture fixture) : IAsyncLifetime
 
     protected AsyncServiceScope Scope => _scope ?? throw new InvalidOperationException("Scope is not initialized");
     protected AppDbContext DbContext => Scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    protected TestFactory Factory => new TestFactory(DbContext);
 
     public Task InitializeAsync()
     {

@@ -6,7 +6,9 @@
       &lt;TestId&gt;xUnit::D7EB0B97-06A3-41D7-A795-FA1CE4906F83::net9.0::Courses.Tests.UnitTest1&lt;/TestId&gt;
       &lt;TestId&gt;xUnit::D7EB0B97-06A3-41D7-A795-FA1CE4906F83::net9.0::Courses.Tests.UserRepositoryTest.Test_AuthenticateUserByEmailPassword&lt;/TestId&gt;
       &lt;TestId&gt;xUnit::D7EB0B97-06A3-41D7-A795-FA1CE4906F83::net9.0::Courses.Tests.UserRepositoryTest&lt;/TestId&gt;
+      &lt;TestId&gt;xUnit::D7EB0B97-06A3-41D7-A795-FA1CE4906F83::net9.0::Courses.Tests.Repositories.UserTokenRepositoryTest.Test_IssueAccessTokenForUser&lt;/TestId&gt;
     &lt;/TestAncestor&gt;
     &lt;ProjectFile&gt;D7EB0B97-06A3-41D7-A795-FA1CE4906F83/d:Repositories/f:UserRepositoryTest.cs&lt;/ProjectFile&gt;
+    &lt;ProjectFile&gt;D7EB0B97-06A3-41D7-A795-FA1CE4906F83/d:Repositories/f:UserTokenRepositoryTest.cs&lt;/ProjectFile&gt;
   &lt;/Or&gt;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

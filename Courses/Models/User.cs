@@ -1,6 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Net;
+using Isopoh.Cryptography.Argon2;
 using Microsoft.EntityFrameworkCore;
 
 namespace Courses.Models;
@@ -26,6 +27,12 @@ public class User
     [StringLength(255)] public string? Company { get; set; }
 
     [StringLength(255)] public string? PasswordHash { get; set; }
+
+    [NotMapped]
+    public string Password
+    {
+        set => PasswordHash = Argon2.Hash(value);
+    }
 
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;

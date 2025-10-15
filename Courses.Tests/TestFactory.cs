@@ -2,14 +2,14 @@ using System.Security.Cryptography;
 using Courses.Models;
 using Isopoh.Cryptography.Argon2;
 
-namespace Courses.Tests.Factories;
+namespace Courses.Tests;
 
-public class UserFactory(AppDbContext dbContext)
+public class TestFactory(AppDbContext dbContext)
 {
     private const string ValidPassword = "example password";
     private static readonly string PasswordHash = Argon2.Hash(ValidPassword, 1, 16 * 1024);
 
-    public User Create(Action<User> overrides = null)
+    public async Task<User> CreateUser(Action<User> overrides = null)
     {
         var rand = Convert.ToHexStringLower(RandomNumberGenerator.GetBytes(3));
         var user = new User
@@ -17,6 +17,11 @@ public class UserFactory(AppDbContext dbContext)
             Email = $"example-{rand}@example.com",
             GivenName = "Example",
             FamilyName = "User",
+            PasswordHash = PasswordHash,
         };
+
+        await dbContext.AddAsync(user);
+        await dbContext.SaveChangesAsync();
+        return user;
     }
 }
