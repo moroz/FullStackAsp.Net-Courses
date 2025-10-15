@@ -6,4 +6,12 @@ export default {
 			my_products: "My products",
 		},
 	},
+	sessions: {
+		new: {
+			header: "Sign in",
+			email: "Email:",
+			password: "Password:",
+			submit: "Sign in",
+		},
+	},
 };

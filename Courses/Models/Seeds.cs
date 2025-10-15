@@ -44,7 +44,7 @@ public static class Seeds
             Id = new Guid("0199d410-cbcd-7407-8cab-cca22fbf2e4d"),
             Email = "hs@moroz.dev",
             Country = "TW",
-            PasswordHash = Argon2.Hash("foobar"),
+            Password = "foobar",
             GivenName = "Karol",
             FamilyName = "Moroz",
         });

@@ -19,6 +19,7 @@
 				<li><a href="/events">{$t("common.header.nav.events")}</a></li>
 				<li><a href="/videos">{$t("common.header.nav.videos")}</a></li>
 				<li><a href="/dashboard">{$t("common.header.nav.my_products")}</a></li>
+				<li><a href="/login">Log in</a></li>
 			</ul>
 		</nav>
 	</div>

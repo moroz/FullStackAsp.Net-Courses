@@ -2,10 +2,16 @@ import type * as grpc from '@grpc/grpc-js';
 import type { MessageTypeDefinition } from '@grpc/proto-loader';
 
 import type { CoursesApiClient as _courses_CoursesApiClient, CoursesApiDefinition as _courses_CoursesApiDefinition } from './courses/CoursesApi';
+import type { ErrorMessage as _courses_ErrorMessage, ErrorMessage__Output as _courses_ErrorMessage__Output } from './courses/ErrorMessage';
 import type { Event as _courses_Event, Event__Output as _courses_Event__Output } from './courses/Event';
+import type { GetCurrentUserRequest as _courses_GetCurrentUserRequest, GetCurrentUserRequest__Output as _courses_GetCurrentUserRequest__Output } from './courses/GetCurrentUserRequest';
+import type { GetCurrentUserResponse as _courses_GetCurrentUserResponse, GetCurrentUserResponse__Output as _courses_GetCurrentUserResponse__Output } from './courses/GetCurrentUserResponse';
 import type { ListEventsRequest as _courses_ListEventsRequest, ListEventsRequest__Output as _courses_ListEventsRequest__Output } from './courses/ListEventsRequest';
 import type { ListEventsResponse as _courses_ListEventsResponse, ListEventsResponse__Output as _courses_ListEventsResponse__Output } from './courses/ListEventsResponse';
+import type { SignInResponse as _courses_SignInResponse, SignInResponse__Output as _courses_SignInResponse__Output } from './courses/SignInResponse';
+import type { SignInWithPasswordRequest as _courses_SignInWithPasswordRequest, SignInWithPasswordRequest__Output as _courses_SignInWithPasswordRequest__Output } from './courses/SignInWithPasswordRequest';
 import type { UUID as _courses_UUID, UUID__Output as _courses_UUID__Output } from './courses/UUID';
+import type { User as _courses_User, User__Output as _courses_User__Output } from './courses/User';
 import type { BoolValue as _google_protobuf_BoolValue, BoolValue__Output as _google_protobuf_BoolValue__Output } from './google/protobuf/BoolValue';
 import type { BytesValue as _google_protobuf_BytesValue, BytesValue__Output as _google_protobuf_BytesValue__Output } from './google/protobuf/BytesValue';
 import type { DoubleValue as _google_protobuf_DoubleValue, DoubleValue__Output as _google_protobuf_DoubleValue__Output } from './google/protobuf/DoubleValue';
@@ -24,10 +30,16 @@ type SubtypeConstructor<Constructor extends new (...args: any) => any, Subtype> 
 export interface ProtoGrpcType {
   courses: {
     CoursesApi: SubtypeConstructor<typeof grpc.Client, _courses_CoursesApiClient> & { service: _courses_CoursesApiDefinition }
+    ErrorMessage: MessageTypeDefinition<_courses_ErrorMessage, _courses_ErrorMessage__Output>
     Event: MessageTypeDefinition<_courses_Event, _courses_Event__Output>
+    GetCurrentUserRequest: MessageTypeDefinition<_courses_GetCurrentUserRequest, _courses_GetCurrentUserRequest__Output>
+    GetCurrentUserResponse: MessageTypeDefinition<_courses_GetCurrentUserResponse, _courses_GetCurrentUserResponse__Output>
     ListEventsRequest: MessageTypeDefinition<_courses_ListEventsRequest, _courses_ListEventsRequest__Output>
     ListEventsResponse: MessageTypeDefinition<_courses_ListEventsResponse, _courses_ListEventsResponse__Output>
+    SignInResponse: MessageTypeDefinition<_courses_SignInResponse, _courses_SignInResponse__Output>
+    SignInWithPasswordRequest: MessageTypeDefinition<_courses_SignInWithPasswordRequest, _courses_SignInWithPasswordRequest__Output>
     UUID: MessageTypeDefinition<_courses_UUID, _courses_UUID__Output>
+    User: MessageTypeDefinition<_courses_User, _courses_User__Output>
   }
   google: {
     protobuf: {
