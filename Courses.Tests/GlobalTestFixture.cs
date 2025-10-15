@@ -1,4 +1,6 @@
+using Courses.Grpc;
 using Courses.Models;
+using Grpc.Net.Client;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
@@ -10,10 +12,10 @@ public class GlobalTestFixture : IAsyncLifetime
 {
     private WebApplicationFactory<Program>? _factory;
 
-    public WebApplicationFactory<Program> Factory =>
+    public WebApplicationFactory<Program> WebFactory =>
         _factory ?? throw new InvalidOperationException("Factory is not initialized");
 
-    public AsyncServiceScope AsyncScope => Factory.Services.CreateAsyncScope();
+    public AsyncServiceScope AsyncScope => WebFactory.Services.CreateAsyncScope();
 
     public async Task InitializeAsync()
     {
@@ -39,5 +41,15 @@ public class GlobalTestFixture : IAsyncLifetime
         await using var scope = AsyncScope;
         var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
         await Seeds.Run(db);
+    }
+
+    public CoursesApi.CoursesApiClient ApiClient()
+    {
+        var client = WebFactory.CreateDefaultClient();
+        var channel = GrpcChannel.ForAddress(client.BaseAddress!, new GrpcChannelOptions
+        {
+            HttpClient = client,
+        });
+        return new CoursesApi.CoursesApiClient(channel);
     }
 }

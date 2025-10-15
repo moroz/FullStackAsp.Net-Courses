@@ -5,18 +5,16 @@ using Google.Protobuf.WellKnownTypes;
 
 namespace Courses.Services;
 
-public class CoursesService(ILogger<GreeterService> logger, EventRepository eventRepository) : CoursesApi.CoursesApiBase
+public partial class CoursesService(ILogger<GreeterService> logger, AppDbContext dbContext)
+    : CoursesApi.CoursesApiBase
 {
     private readonly ILogger<GreeterService> _logger = logger;
 
     public override async Task<ListEventsResponse> ListEvents(ListEventsRequest request, ServerCallContext context)
     {
-        var events = await eventRepository.ListEvents();
-        var list = new List<Event>();
-
-        foreach (var e in events)
-        {
-            list.Add(new Event
+        var repo = new EventRepository(dbContext);
+        var events = await repo.ListEvents();
+        var list = events.Select(e => new Event
             {
                 TitleEn = e.TitleEn,
                 TitlePl = e.TitlePl,
@@ -28,12 +26,9 @@ public class CoursesService(ILogger<GreeterService> logger, EventRepository even
                 DescriptionEn = e.DescriptionEn,
                 DescriptionPl = e.DescriptionPl,
                 Venue = e.Venue,
-                Id = new UUID
-                {
-                    Value = e.Id.ToString()
-                }
-            });
-        }
+                Id = new UUID { Value = e.Id.ToString() }
+            })
+            .ToList();
 
         return new ListEventsResponse
         {

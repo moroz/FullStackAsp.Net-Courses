@@ -9,41 +9,29 @@ namespace Courses.Tests.Repositories;
 [Collection("integration")]
 public class UserRepositoryTest(GlobalTestFixture fixture) : DbTestBase(fixture), IAsyncLifetime
 {
+    private User? _user;
+    private User User => _user ?? throw new InvalidOperationException("User is not initialized");
+
     public new async Task InitializeAsync()
     {
         await base.InitializeAsync();
-
-        var user = new User
-        {
-            Id = UserId,
-            Email = Email,
-            GivenName = "Example",
-            FamilyName = "User",
-            PasswordHash = PasswordHash,
-        };
-        await DbContext.Users.AddAsync(user);
-        await DbContext.SaveChangesAsync();
+        _user = await Factory.CreateUser(u => { u.Email = "user@example.com"; });
     }
 
     public new async Task DisposeAsync()
     {
-        await DbContext.Users.Where(u => u.Id == UserId).ExecuteDeleteAsync();
-        await DbContext.SaveChangesAsync();
+        await DbContext.Users.Where(u => u.Id == User.Id).ExecuteDeleteAsync();
         await base.DisposeAsync();
     }
 
-    private static readonly Guid UserId = Guid.CreateVersion7();
-
-    private const string ValidPassword = "example password";
-    private static readonly string PasswordHash = Argon2.Hash(ValidPassword, 1, 16 * 1024);
     private const string Email = "user@example.com";
 
     [Theory]
-    [InlineData(Email, ValidPassword, true)]
-    [InlineData("User@Example.Com", ValidPassword, true)]
-    [InlineData("uSeR@eXaMpLe.cOm", ValidPassword, true)]
+    [InlineData(Email, TestFactory.ValidPassword, true)]
+    [InlineData("User@Example.Com", TestFactory.ValidPassword, true)]
+    [InlineData("uSeR@eXaMpLe.cOm", TestFactory.ValidPassword, true)]
     [InlineData(Email, "invalid", false)]
-    [InlineData("invalid email", ValidPassword, false)]
+    [InlineData("invalid email", TestFactory.ValidPassword, false)]
     public async Task Test_AuthenticateUserByEmailPassword(string email, string password, bool valid)
     {
         var repo = Scope.ServiceProvider.GetRequiredService<UserRepository>();
@@ -52,7 +40,7 @@ public class UserRepositoryTest(GlobalTestFixture fixture) : DbTestBase(fixture)
         if (valid)
         {
             Assert.NotNull(actual);
-            Assert.Equal(UserId, actual.Id);
+            Assert.Equal(User.Id, actual.Id);
         }
         else
         {

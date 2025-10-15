@@ -6,10 +6,10 @@ namespace Courses.Tests;
 
 public class TestFactory(AppDbContext dbContext)
 {
-    private const string ValidPassword = "example password";
+    public const string ValidPassword = "example password";
     private static readonly string PasswordHash = Argon2.Hash(ValidPassword, 1, 16 * 1024);
 
-    public async Task<User> CreateUser(Action<User> overrides = null)
+    public async Task<User> CreateUser(Action<User>? overrides = null)
     {
         var rand = Convert.ToHexStringLower(RandomNumberGenerator.GetBytes(3));
         var user = new User
@@ -19,6 +19,8 @@ public class TestFactory(AppDbContext dbContext)
             FamilyName = "User",
             PasswordHash = PasswordHash,
         };
+
+        overrides?.Invoke(user);
 
         await dbContext.AddAsync(user);
         await dbContext.SaveChangesAsync();

@@ -10,13 +10,6 @@ namespace Courses.Tests;
 public class UnitTest1(GlobalTestFixture fixture) : DbTestBase(fixture)
 {
     [Fact]
-    public void Test_TheTruth()
-    {
-        var actual = 2 + 2;
-        Assert.Equal(4, actual);
-    }
-
-    [Fact]
     public async Task Test_EventRepository()
     {
         await using var scope = Fixture.AsyncScope;
@@ -28,7 +21,7 @@ public class UnitTest1(GlobalTestFixture fixture) : DbTestBase(fixture)
     [Fact]
     public async Task Test_HttpClient()
     {
-        var client = Fixture.Factory.CreateDefaultClient();
+        var client = Fixture.WebFactory.CreateDefaultClient();
         var response = await client.GetAsync("/");
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
     }
@@ -36,9 +29,7 @@ public class UnitTest1(GlobalTestFixture fixture) : DbTestBase(fixture)
     [Fact]
     public async Task Test_GrpcClient()
     {
-        var client = Fixture.Factory.CreateDefaultClient();
-        var channel = GrpcChannel.ForAddress(client.BaseAddress!, new GrpcChannelOptions { HttpClient = client, });
-        var grpcClient = new CoursesApi.CoursesApiClient(channel);
+        var grpcClient = Fixture.ApiClient();
         var actual = await grpcClient.ListEventsAsync(new ListEventsRequest());
         Assert.NotEmpty(actual.Events);
     }
