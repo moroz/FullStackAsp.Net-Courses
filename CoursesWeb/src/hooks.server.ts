@@ -1,8 +1,10 @@
 import { type Handle } from "@sveltejs/kit";
 import { sequence } from "@sveltejs/kit/hooks";
 import parser from "accept-language-parser";
-import { DefaultLocale, SupportedLocales } from "@/lib/translations";
-import { maybeLoadSession, saveSession, SessionCookieName } from "@/lib/session";
+import { DefaultLocale, SupportedLocales } from "$lib/translations";
+import { maybeLoadSession, saveSession, SessionCookieName } from "$lib/session";
+import type { User } from "@api/interfaces";
+import { getCurrentUser } from "@api/queries/auth";
 
 const loadSession: Handle = async ({ event, resolve }) => {
 	event.locals.session = (await maybeLoadSession(event.cookies.get(SessionCookieName))) ?? {};
@@ -28,4 +30,17 @@ const resolveLocale: Handle = async ({ event, resolve }) => {
 	return resolve(event);
 };
 
-export const handle = sequence(loadSession, resolveLocale);
+const fetchCurrentUser: Handle = async ({ event, resolve }) => {
+	const accessToken = event.locals.session.accessToken;
+	let user: User | null = null;
+
+	if (accessToken) {
+		user = await getCurrentUser(accessToken);
+	}
+
+	event.locals.user = user;
+
+	return resolve(event);
+};
+
+export const handle = sequence(loadSession, resolveLocale, fetchCurrentUser);

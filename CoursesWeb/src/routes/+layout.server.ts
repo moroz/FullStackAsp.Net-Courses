@@ -3,5 +3,6 @@ import type { LayoutLoad, LayoutServerLoad } from "../../.svelte-kit/types/src/r
 export const load: LayoutServerLoad = ({ locals }) => {
 	return {
 		locale: locals.locale,
+		user: locals.user,
 	};
 };

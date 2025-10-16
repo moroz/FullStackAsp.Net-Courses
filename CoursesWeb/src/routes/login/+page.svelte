@@ -1,19 +1,20 @@
 <script lang="ts">
+	import type { PageProps } from "./$types";
 	import { t } from "$lib/translations";
+	import InputField from "@components/forms/input-field.svelte";
+
+	let { data }: PageProps = $props();
 </script>
 
-<form method="POST" class="mx-auto grid max-w-100 gap-3 border p-6">
+<pre>{JSON.stringify(data, null, 2)}</pre>
+
+<form method="POST" class="mx-auto grid max-w-100 gap-4 border p-6">
 	<h2 class="text-center text-xl font-bold lg:text-2xl">{$t("common.sessions.new.header")}</h2>
 
-	<label class="grid">
-		{$t("common.sessions.new.email")}
-		<input name="email" type="email" class="border" autofocus />
-	</label>
+	<InputField name="email" type="email" labelKey="common.sessions.new.email" />
+	<InputField name="password" type="password" labelKey="common.sessions.new.password" />
 
-	<label class="grid">
-		{$t("common.sessions.new.password")}
-		<input name="password" type="password" class="border" />
-	</label>
-
-	<button>{$t("common.sessions.new.submit")}</button>
+	<button class="h-10 w-full bg-primary font-bold text-white"
+		>{$t("common.sessions.new.submit")}</button
+	>
 </form>
