@@ -9,19 +9,21 @@ export const actions = {
 		const email = formData.get("email") as string;
 		const password = formData.get("password") as string;
 
-		if (email && password) {
-			const result = await signInWithPassword(email, password);
+		if (!email || !password) return;
 
-			if (result?.success) {
-				const asUint8Array = new Uint8Array(result.accessToken!);
-				const session = {
-					...locals.session,
-					accessToken: asUint8Array,
-				};
-				await saveSession(session, cookies);
+		const result = await signInWithPassword(email, password);
 
-				return redirect(303, "/");
-			}
+		if (result?.success) {
+			const asUint8Array = new Uint8Array(result.accessToken!);
+			const session = {
+				...locals.session,
+				accessToken: asUint8Array,
+			};
+			await saveSession(session, cookies);
+
+			return redirect(303, "/");
+		} else {
+			return { success: false, errors: result?.errors };
 		}
 	},
 } satisfies Actions;

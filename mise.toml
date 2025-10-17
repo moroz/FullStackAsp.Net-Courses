@@ -1,6 +1,6 @@
 [tools]
 dotnet = "latest"
-node = "latest"
+node = "25.0.0"
 pnpm = "latest"
 
 [env]

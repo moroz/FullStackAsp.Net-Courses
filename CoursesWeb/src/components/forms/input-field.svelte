@@ -13,5 +13,11 @@
 
 <label class="grid gap-1">
 	<span class="leading-tight font-bold">{$t(labelKey)}</span>
-	<input type="text" bind:value {name} class={twMerge("h-10 border", className)} {...rest} />
+	<input
+		type="text"
+		bind:value
+		{name}
+		class={twMerge("h-10 rounded-sm border px-3", className)}
+		{...rest}
+	/>
 </label>
