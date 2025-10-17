@@ -12,6 +12,7 @@ export default {
 			email: "Email:",
 			password: "Hasło:",
 			submit: "Zaloguj się",
+			no_account_yet_html: `Nie masz jeszcze konta? <a href="{path}">Zarejestruj się</a>`,
 		},
 	},
 };

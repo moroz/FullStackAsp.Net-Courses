@@ -1,4 +1,4 @@
-import type { Actions } from "../../../../.svelte-kit/types/src/routes";
+import type { Actions } from "./$types";
 import { signInWithPassword } from "@api/mutations";
 import { saveSession } from "$lib/session";
 import { redirect } from "@sveltejs/kit";

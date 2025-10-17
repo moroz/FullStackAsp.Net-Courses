@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { PageProps } from "../../../../.svelte-kit/types/src/routes";
+	import type { PageProps } from "./$types";
 	import { t } from "$lib/translations";
 	import InputField from "@components/forms/input-field.svelte";
 	import { enhance } from "$app/forms";
@@ -7,7 +7,7 @@
 	let { form }: PageProps = $props();
 </script>
 
-<form method="POST" class="mx-auto grid max-w-100 gap-4 rounded-sm border p-6" use:enhance>
+<form method="POST" class="grid gap-6" use:enhance>
 	<h2 class="text-center text-xl font-bold lg:text-2xl">{$t("common.sessions.new.header")}</h2>
 
 	{#if form?.success}
