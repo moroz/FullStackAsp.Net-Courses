@@ -1,9 +1,9 @@
 <script lang="ts">
-	import "../app.css";
+	import "../../app.css";
 	import favicon from "$lib/assets/favicon.svg";
 	import Header from "@components/header.svelte";
 	import Footer from "@components/footer.svelte";
-	import type { LayoutProps } from "./$types";
+	import type { LayoutProps } from "../../../.svelte-kit/types/src/routes";
 
 	let { children, data }: LayoutProps = $props();
 </script>

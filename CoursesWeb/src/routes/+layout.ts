@@ -1,6 +1,5 @@
-import { type Load } from "@sveltejs/kit";
-import { loadTranslations, resolveLocaleFromAcceptLanguageHeader } from "@/lib/translations";
-import type { LayoutLoad } from "../../.svelte-kit/types/src/routes/$types";
+import { loadTranslations } from "$lib/translations";
+import type { LayoutLoad } from "./$types";
 
 export const load: LayoutLoad = async ({ data, url }) => {
 	const { pathname } = url;

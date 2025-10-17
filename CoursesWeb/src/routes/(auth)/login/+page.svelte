@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { PageProps } from "./$types";
+	import type { PageProps } from "../../../../.svelte-kit/types/src/routes";
 	import { t } from "$lib/translations";
 	import InputField from "@components/forms/input-field.svelte";
 	import { enhance } from "$app/forms";
