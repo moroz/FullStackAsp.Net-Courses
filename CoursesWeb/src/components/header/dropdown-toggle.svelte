@@ -9,7 +9,6 @@
 
 	const { open, user }: Props = $props();
 
-	const initials = user.givenName[0] + user.familyName[0];
 	const fullName = [user.salutation, user.givenName, user.familyName].filter(Boolean).join(" ");
 	const title = `${fullName}\n(${user.email})`;
 </script>
@@ -20,5 +19,5 @@
 	aria-expanded={open}
 	{title}
 >
-	<Avatar {user} />
+	<Avatar {user} class="h-[34px]" />
 </button>

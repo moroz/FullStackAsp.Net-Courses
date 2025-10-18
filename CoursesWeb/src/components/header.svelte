@@ -32,7 +32,7 @@
 	<div class="container mx-auto flex h-full items-center justify-between">
 		<a href="/"><h1 class="text-4xl font-bold text-primary">Homeo sapiens</h1></a>
 		<nav>
-			<ul class="flex gap-1 py-3">
+			<ul class="flex gap-1 py-4">
 				<li><LanguageSwitcher {locale} {pathname} class="navbar-item h-full uppercase" /></li>
 				<li><a href="/events" class="navbar-item">{$t("common.header.nav.events")}</a></li>
 				<li><a href="/videos" class="navbar-item">{$t("common.header.nav.videos")}</a></li>
@@ -55,7 +55,7 @@
 					<li>
 						<a
 							href="/login"
-							class="inline-flex h-full items-center justify-center rounded-sm border border-primary px-3 text-lg font-semibold text-primary transition-colors hover:bg-white"
+							class="ml-1 inline-flex h-full items-center justify-center rounded-sm border border-primary-900 px-4 font-semibold text-primary-900 transition-colors hover:bg-primary-100"
 							>{$t("common.header.nav.sign_in")}</a
 						>
 					</li>
@@ -75,6 +75,6 @@
 	}
 
 	nav :global(.navbar-item) {
-		@apply inline-flex items-center rounded-sm px-4 text-lg font-semibold text-primary transition hover:bg-slate-200;
+		@apply inline-flex items-center rounded-sm px-3 font-semibold text-primary transition hover:bg-slate-200;
 	}
 </style>

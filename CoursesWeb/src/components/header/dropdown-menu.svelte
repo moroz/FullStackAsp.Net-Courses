@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { enhance } from "$app/forms";
 	import type { User } from "@api/interfaces";
 	import Avatar from "@components/avatar.svelte";
 
@@ -25,7 +24,7 @@
 	<section>
 		<ul>
 			<li>
-				<form action="/login?/signOut" method="POST" use:enhance>
+				<form action="/login?/signOut" method="POST">
 					<button class="text h-10 w-full cursor-pointer transition-colors hover:bg-slate-100">
 						Sign out
 					</button>

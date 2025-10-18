@@ -17,7 +17,7 @@
 		type="text"
 		bind:value
 		{name}
-		class={twMerge("h-10 rounded-sm border px-3", className)}
+		class={twMerge("h-10 rounded-sm border border-slate-500 px-3", className)}
 		{...rest}
 	/>
 </label>

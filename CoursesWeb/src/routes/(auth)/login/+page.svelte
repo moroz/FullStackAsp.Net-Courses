@@ -3,6 +3,7 @@
 	import { t } from "$lib/translations";
 	import InputField from "@components/forms/input-field.svelte";
 	import { enhance } from "$app/forms";
+	import SubmitButton from "@components/forms/submit-button.svelte";
 
 	let { form }: PageProps = $props();
 </script>
@@ -29,7 +30,9 @@
 		autocomplete="current-password"
 	/>
 
-	<button class="h-10 w-full rounded-sm bg-primary font-bold text-white"
-		>{$t("common.sessions.new.submit")}</button
-	>
+	<SubmitButton>{$t("common.sessions.new.submit")}</SubmitButton>
+
+	<p class="text-center">
+		{@html $t("common.sessions.new.no_account_yet_html", { path: "/register" })}
+	</p>
 </form>

@@ -4,6 +4,7 @@
 	import type { LayoutProps } from "./$types";
 	import LanguageSwitcher from "@components/language-switcher.svelte";
 	import Card from "@components/card.svelte";
+	import { t } from "$lib/translations";
 
 	let { children, data }: LayoutProps = $props();
 </script>
@@ -24,10 +25,15 @@
 		<Card class="w-100 space-y-6">
 			{@render children?.()}
 
-			<footer class="flex items-center justify-center gap-3 text-center text-primary">
-				<LanguageSwitcher full locale={data.locale} pathname={data.pathname} />
+			<footer class="flex items-center justify-center gap-3 text-center">
+				<LanguageSwitcher
+					full
+					locale={data.locale}
+					pathname={data.pathname}
+					class="hover:text-primary-700"
+				/>
 				&bull;
-				<a href="/"> Go back </a>
+				<a href="/">{$t("common.sessions.common.go_back")}</a>
 			</footer>
 		</Card>
 	</main>
@@ -37,6 +43,6 @@
 	@reference "@/app.css";
 
 	footer :global(a) {
-		@apply cursor-pointer px-3 py-2 transition-colors hover:bg-slate-200;
+		@apply cursor-pointer px-3 py-2 text-primary-800 no-underline transition-colors hover:bg-slate-200 hover:text-primary-700;
 	}
 </style>

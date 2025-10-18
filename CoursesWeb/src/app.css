@@ -17,3 +17,7 @@
 
     --spacing-header: calc(70 / 4 * var(--spacing));
 }
+
+a:not([class]) {
+    @apply text-primary-800 underline underline-offset-2 hover:text-primary-700 transform-content;
+}
