@@ -24,17 +24,10 @@
 		<Card class="w-100 space-y-6">
 			{@render children?.()}
 
-			<footer class="flex items-center justify-center gap-4 text-center text-primary">
-				<LanguageSwitcher
-					full
-					locale={data.locale}
-					pathname={data.pathname}
-					class="cursor-pointer px-4 py-2 outline transition-colors hover:bg-slate-200"
-				/>
-
+			<footer class="flex items-center justify-center gap-3 text-center text-primary">
+				<LanguageSwitcher full locale={data.locale} pathname={data.pathname} />
 				&bull;
-
-				<a href="/" class="px-4 py-2 transition-colors hover:bg-slate-200"> Go back </a>
+				<a href="/"> Go back </a>
 			</footer>
 		</Card>
 	</main>
@@ -44,6 +37,6 @@
 	@reference "@/app.css";
 
 	footer :global(a) {
-		@apply outline;
+		@apply cursor-pointer px-3 py-2 transition-colors hover:bg-slate-200;
 	}
 </style>

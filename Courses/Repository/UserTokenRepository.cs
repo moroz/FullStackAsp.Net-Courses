@@ -35,4 +35,10 @@ public class UserTokenRepository(AppDbContext dbContext)
             .Select(x => x.u)
             .FirstOrDefaultAsync();
     }
+
+    public async Task<bool> RevokeAccessToken(byte[] token)
+    {
+        var count = await dbContext.UserTokens.Where(t => t.Token == token).ExecuteDeleteAsync();
+        return count > 0;
+    }
 }

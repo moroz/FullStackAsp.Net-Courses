@@ -41,10 +41,9 @@ public partial class CoursesService
         };
     }
 
-    public override Task<GetCurrentUserResponse> GetCurrentUser(GetCurrentUserRequest request,
+    public override Task<GetCurrentUserResponse> GetCurrentUser(EmptyRequest request,
         ServerCallContext context)
     {
-        var userTokenRepository = new UserTokenRepository(dbContext);
         var user = context.GetCurrentUser();
 
         if (user == null)
@@ -71,5 +70,23 @@ public partial class CoursesService
                 UpdatedAt = Timestamp.FromDateTime(user.UpdatedAt)
             }
         });
+    }
+
+    public override async Task<SignOutResponse> SignOut(EmptyRequest request, ServerCallContext context)
+    {
+        var repo = new UserTokenRepository(dbContext);
+        var token = context.GetCurrentAccessToken();
+        if (token == null)
+        {
+            return new SignOutResponse
+            {
+                Success = false,
+            };
+        }
+
+        return new SignOutResponse
+        {
+            Success = await repo.RevokeAccessToken(token),
+        };
     }
 }

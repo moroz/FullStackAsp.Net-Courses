@@ -10,12 +10,13 @@ public class AuthenticationMiddleware(RequestDelegate next, ILogger<Authenticati
         var header = context.Request.Headers["Authorization"].FirstOrDefault();
 
         User? user = null;
+        byte[]? token = null;
 
         if (!string.IsNullOrEmpty(header) && header.StartsWith("Bearer "))
         {
             try
             {
-                var token = Convert.FromBase64String(header["Bearer ".Length..].Trim());
+                token = Convert.FromBase64String(header["Bearer ".Length..].Trim());
                 user = await repo.AuthenticateUserByAccessToken(token);
                 if (user != null)
                 {
@@ -29,6 +30,7 @@ public class AuthenticationMiddleware(RequestDelegate next, ILogger<Authenticati
         }
 
         context.Items["CurrentUser"] = user;
+        context.Items["AccessToken"] = token;
 
         await next(context);
     }

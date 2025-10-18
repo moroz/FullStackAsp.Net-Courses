@@ -1,6 +1,7 @@
 export default {
 	header: {
 		nav: {
+			sign_in: "Logowanie",
 			events: "Wydarzenia",
 			videos: "Wideo",
 			my_products: "Moje produkty",

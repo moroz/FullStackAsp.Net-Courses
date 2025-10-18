@@ -12,7 +12,8 @@ service CoursesApi {
   // Lists all events
   rpc ListEvents (ListEventsRequest) returns (ListEventsResponse);
   rpc SignInWithPassword (SignInWithPasswordRequest) returns (SignInResponse);
-  rpc GetCurrentUser (GetCurrentUserRequest) returns (GetCurrentUserResponse);
+  rpc GetCurrentUser (EmptyRequest) returns (GetCurrentUserResponse);
+  rpc SignOut (EmptyRequest) returns (SignOutResponse);
 }
 
 // UUID message for ID representation
@@ -40,6 +41,8 @@ message Event {
   google.protobuf.StringValue venue = 11;
 }
 
+message EmptyRequest {}
+
 // Request for listing events
 message ListEventsRequest {
   // Can add filters here if needed in the future
@@ -61,7 +64,9 @@ message SignInResponse {
   optional bytes access_token = 3;
 }
 
-message GetCurrentUserRequest {}
+message SignOutResponse {
+  bool success = 1;
+}
 
 message GetCurrentUserResponse {
   optional User user = 1;

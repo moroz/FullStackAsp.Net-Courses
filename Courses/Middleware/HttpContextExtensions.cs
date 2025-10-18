@@ -14,6 +14,16 @@ public static class HttpContextExtensions
 
         return null;
     }
+
+    public static byte[]? GetCurrentAccessToken(this HttpContext context)
+    {
+        if (context.Items.TryGetValue("AccessToken", out var token) && token != null)
+        {
+            return token as byte[];
+        }
+
+        return null;
+    }
 }
 
 public static class ServerCallContextExtensions
@@ -21,5 +31,10 @@ public static class ServerCallContextExtensions
     public static User? GetCurrentUser(this ServerCallContext context)
     {
         return context.GetHttpContext().GetCurrentUser();
+    }
+
+    public static byte[]? GetCurrentAccessToken(this ServerCallContext context)
+    {
+        return context.GetHttpContext().GetCurrentAccessToken();
     }
 }

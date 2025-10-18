@@ -55,7 +55,33 @@ public class SignInTest(GlobalTestFixture fixture) : DbTestBase(fixture)
             { "authorization", $"Bearer {Convert.ToBase64String(token.Token)}" }
         };
 
-        var result = await client.GetCurrentUserAsync(new GetCurrentUserRequest(), new CallOptions(metadata));
+        var result = await client.GetCurrentUserAsync(new EmptyRequest(), new CallOptions(metadata));
         Assert.NotNull(result.User);
+    }
+
+    [Fact]
+    public async Task Test_SignOut()
+    {
+        var user = await Factory.CreateUser();
+        Assert.NotNull(user);
+
+        var client = Fixture.ApiClient();
+        var repo = new UserTokenRepository(DbContext);
+        var token = await repo.IssueAccessTokenForUser(user);
+
+        var metadata = new Metadata
+        {
+            { "authorization", $"Bearer {Convert.ToBase64String(token.Token)}" }
+        };
+
+        var result = await client.SignOutAsync(new EmptyRequest(), new CallOptions(metadata));
+        Assert.True(result.Success);
+
+        var exists = DbContext.UserTokens.Any(t => t.Token == token.Token);
+        Assert.False(exists);
+
+        // test idempotence
+        result = await client.SignOutAsync(new EmptyRequest(), new CallOptions(metadata));
+        Assert.False(result.Success);
     }
 }

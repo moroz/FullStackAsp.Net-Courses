@@ -7,7 +7,7 @@
 	let { form }: PageProps = $props();
 </script>
 
-<form method="POST" class="grid gap-6" use:enhance>
+<form method="POST" class="grid gap-6" use:enhance action="/login?/signIn">
 	<h2 class="text-center text-xl font-bold lg:text-2xl">{$t("common.sessions.new.header")}</h2>
 
 	{#if form?.success}
@@ -16,8 +16,18 @@
 		</div>
 	{/if}
 
-	<InputField name="email" type="email" labelKey="common.sessions.new.email" />
-	<InputField name="password" type="password" labelKey="common.sessions.new.password" />
+	<InputField
+		name="email"
+		type="email"
+		labelKey="common.sessions.new.email"
+		autocomplete="email webauthn"
+	/>
+	<InputField
+		name="password"
+		type="password"
+		labelKey="common.sessions.new.password"
+		autocomplete="current-password"
+	/>
 
 	<button class="h-10 w-full rounded-sm bg-primary font-bold text-white"
 		>{$t("common.sessions.new.submit")}</button

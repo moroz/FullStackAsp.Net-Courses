@@ -7,4 +7,5 @@ export interface User {
 	familyName: string;
 	createdAt: ISOTimestamp;
 	lastLoginAt: ISOTimestamp | null;
+	salutation: string | null;
 }

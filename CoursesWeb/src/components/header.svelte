@@ -2,7 +2,8 @@
 	import LanguageSwitcher from "./language-switcher.svelte";
 	import { type LocaleCode, t } from "$lib/translations";
 	import type { User } from "@api/interfaces";
-	import Avatar from "./header/avatar.svelte";
+	import DropdownToggle from "./header/dropdown-toggle.svelte";
+	import DropdownMenu from "./header/dropdown-menu.svelte";
 
 	interface Props {
 		locale: LocaleCode;
@@ -11,21 +12,53 @@
 	}
 
 	const { locale, pathname, user }: Props = $props();
+
+	let menuOpen = $state(false);
+	let timeout: NodeJS.Timeout | null = null;
+
+	function onHover() {
+		menuOpen = true;
+		timeout && clearTimeout(timeout);
+	}
+
+	function onMouseOut() {
+		timeout = setTimeout(() => {
+			menuOpen = false;
+		}, 200);
+	}
 </script>
 
-<header class="h-header fixed inset-0 bottom-[unset] z-10 bg-slate-100 text-black shadow">
+<header class="fixed inset-0 bottom-[unset] z-10 h-header bg-slate-100 text-black shadow">
 	<div class="container mx-auto flex h-full items-center justify-between">
 		<a href="/"><h1 class="text-4xl font-bold text-primary">Homeo sapiens</h1></a>
 		<nav>
-			<ul class="flex">
-				<li><LanguageSwitcher {locale} {pathname} /></li>
-				<li><a href="/events">{$t("common.header.nav.events")}</a></li>
-				<li><a href="/videos">{$t("common.header.nav.videos")}</a></li>
-				<li><a href="/dashboard">{$t("common.header.nav.my_products")}</a></li>
+			<ul class="flex gap-1 py-3">
+				<li><LanguageSwitcher {locale} {pathname} class="navbar-item h-full uppercase" /></li>
+				<li><a href="/events" class="navbar-item">{$t("common.header.nav.events")}</a></li>
+				<li><a href="/videos" class="navbar-item">{$t("common.header.nav.videos")}</a></li>
+				<li><a href="/dashboard" class="navbar-item">{$t("common.header.nav.my_products")}</a></li>
 				{#if user}
-					<Avatar {user} />
+					<div
+						tabindex="0"
+						class="relative h-full"
+						role="menubar"
+						onmouseenter={onHover}
+						onmouseleave={onMouseOut}
+						onblur={onMouseOut}
+					>
+						<DropdownToggle {user} open={menuOpen} />
+						{#if menuOpen}
+							<DropdownMenu {user} />
+						{/if}
+					</div>
 				{:else}
-					<li><a href="/login">Log in</a></li>
+					<li>
+						<a
+							href="/login"
+							class="inline-flex h-full items-center justify-center rounded-sm border border-primary px-3 text-lg font-semibold text-primary transition-colors hover:bg-white"
+							>{$t("common.header.nav.sign_in")}</a
+						>
+					</li>
 				{/if}
 			</ul>
 		</nav>
@@ -41,7 +74,7 @@
 		@apply h-full;
 	}
 
-	nav :global(a) {
-		@apply inline-flex items-center px-4 text-lg font-semibold text-primary transition hover:bg-slate-200;
+	nav :global(.navbar-item) {
+		@apply inline-flex items-center rounded-sm px-4 text-lg font-semibold text-primary transition hover:bg-slate-200;
 	}
 </style>
