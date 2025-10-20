@@ -14,18 +14,23 @@ phases:
       - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
       - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
       - IMAGE_TAG=${COMMIT_HASH:=latest}
-      - REPOSITORY_URI_BASE="$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com"
+      - ECR_BASE_URI="$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com"
+      - BACKEND_URI="$ECR_BASE_URI/homeosapiens-backend"
+      - WEB_URI="$ECR_BASE_URI/homeosapiens-web"
 
   build:
     commands:
       - echo Build started on `date`
       - echo Building Docker image for backend
-      - REPOSITORY_URI="$REPOSITORY_URI_BASE/homeosapiens-backend"
-      - docker build -t $REPOSITORY_URI:$IMAGE_TAG --cache-from $REPOSITORY_URI:$ENV --build-arg BUILDKIT_INLINE_CACHE=1 -f Courses/Dockerfile .
-      - docker tag $REPOSITORY_URI:$IMAGE_TAG $REPOSITORY_URI:$ENV
+      - docker build -t $BACKEND_URI:$IMAGE_TAG --cache-from $BACKEND_URI:$ENV --build-arg BUILDKIT_INLINE_CACHE=1 -f Courses/Dockerfile .
+      - docker tag $BACKEND_URI:$IMAGE_TAG $BACKEND_URI:$ENV
+      - echo Building Docker image for Web
+      - docker build -t $WEB_URI:$IMAGE_TAG --cache-from $WEB_URI:$ENV --build-arg BUILDKIT_INLINE_CACHE=1 -f CoursesWeb/Dockerfile .
+      - docker tag $WEB_URI:$IMAGE_TAG $WEB_URI:$ENV
 
   post_build:
     commands:
-      - docker push $REPOSITORY_URI:$IMAGE_TAG
-      - docker push $REPOSITORY_URI:$ENV
-
+      - docker push $BACKEND_URI:$IMAGE_TAG
+      - docker push $BACKEND_URI:$ENV
+      - docker push $WEB_URI:$IMAGE_TAG
+      - docker push $WEB_URI:$ENV

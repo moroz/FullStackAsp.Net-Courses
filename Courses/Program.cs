@@ -34,6 +34,13 @@ if (args.Contains("seed"))
     Environment.Exit(0);
 }
 
+if (app.Environment.IsProduction())
+{
+    using var scope = app.Services.CreateScope();
+    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    await db.Database.MigrateAsync();
+}
+
 app.UseMiddleware<AuthenticationMiddleware>();
 
 // Configure the HTTP request pipeline.
