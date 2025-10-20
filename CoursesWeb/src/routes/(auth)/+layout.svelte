@@ -43,6 +43,6 @@
 	@reference "@/app.css";
 
 	footer :global(a) {
-		@apply cursor-pointer px-3 py-2 text-primary-800 no-underline transition-colors hover:bg-slate-200 hover:text-primary-700;
+		@apply cursor-pointer rounded-sm px-3 py-2 text-primary-800 no-underline transition-colors hover:bg-slate-200 hover:text-primary-700;
 	}
 </style>

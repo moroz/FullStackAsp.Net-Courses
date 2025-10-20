@@ -14,6 +14,7 @@ export default {
 			password: "Utwórz hasło:",
 			confirm_password: "Powtórz hasło:",
 			already_have_an_account_html: `Masz już konto? <a href="{{path}}">Zaloguj się</a>`,
+			submit: "Zarejestruj się",
 		},
 	},
 	sessions: {

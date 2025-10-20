@@ -5,3 +5,9 @@ pnpm = "latest"
 
 [env]
 PGDATABASE = "courses_dev"
+
+[tasks."deploy.staging"]
+run = """
+jj bookmark set -r @- staging
+jj git push @-
+"""

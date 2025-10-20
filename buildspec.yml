@@ -1,0 +1,31 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - ASPNET_VERSION=9.0
+      - DOTNET_SDK_VERSION=9.0
+      - echo Signing in to Dockerhub...
+      - echo $DOCKERHUB_PASSWORD | docker login -u $DOCKERHUB_USERNAME --password-stdin
+      - docker pull mcr.microsoft.com/dotnet/aspnet:$ASPNET_VERSION
+      - docker pull mcr.microsoft.com/dotnet/sdk:$DOTNET_SDK_VERSION
+      - echo Logging in to Amazon ECR...
+      - aws --version
+      - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
+      - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
+      - IMAGE_TAG=${COMMIT_HASH:=latest}
+      - REPOSITORY_URI_BASE="$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com"
+
+  build:
+    commands:
+      - echo Build started on `date`
+      - echo Building Docker image for backend
+      - REPOSITORY_URI="$REPOSITORY_URI_BASE/homeosapiens-backend"
+      - docker build -t $REPOSITORY_URI:$IMAGE_TAG --cache-from $REPOSITORY_URI:$ENV --build-arg BUILDKIT_INLINE_CACHE=1 -f Courses/Dockerfile .
+      - docker tag $REPOSITORY_URI:$IMAGE_TAG $REPOSITORY_URI:$ENV
+
+  post_build:
+    commands:
+      - docker push $REPOSITORY_URI:$IMAGE_TAG
+      - docker push $REPOSITORY_URI:$ENV
+
