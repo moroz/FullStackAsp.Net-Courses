@@ -34,3 +34,10 @@ phases:
       - docker push $BACKEND_URI:$ENV
       - docker push $WEB_URI:$IMAGE_TAG
       - docker push $WEB_URI:$ENV
+
+artifacts:
+  files:
+    - appspec.yml
+    - scripts/restart-docker-services.sh
+  name: "phoenix-docker-$GIT_BRANCH-$(date +%Y-%m-%d)"
+  discard-paths: yes
