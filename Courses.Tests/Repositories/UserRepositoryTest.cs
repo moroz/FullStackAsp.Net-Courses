@@ -47,4 +47,33 @@ public class UserRepositoryTest(GlobalTestFixture fixture) : DbTestBase(fixture)
             Assert.Null(actual);
         }
     }
+
+    [Fact]
+    public async Task Test_RegisterUser()
+    {
+        var repo = new UserRepository(DbContext);
+        var request = new UserRegistrationParams
+        {
+            Email = "valid@example.com",
+            GivenName = "Example",
+            FamilyName = "User",
+            Password = "foobar2000",
+            PasswordConfirmation = "foobar2000"
+        };
+        var (user, result) = await repo.RegisterUser(request);
+        Assert.NotNull(user);
+        Assert.NotNull(result);
+        Assert.True(result.IsValid);
+        Assert.True(await DbContext.Users.Where(u => u.Email == request.Email).AnyAsync());
+        Assert.Equal(request.Email, user.Email);
+        Assert.Equal(request.GivenName, user.GivenName);
+        Assert.Equal(request.FamilyName, user.FamilyName);
+        Assert.StartsWith("$argon2id$", user.PasswordHash);
+        Assert.True(user.IsValidPassword(request.Password));
+    }
+
+    [Fact]
+    public async Task Test_RegisterUserWithInvalidParams()
+    {
+    }
 }

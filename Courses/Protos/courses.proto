@@ -14,6 +14,7 @@ service CoursesApi {
   rpc SignInWithPassword (SignInWithPasswordRequest) returns (SignInResponse);
   rpc GetCurrentUser (EmptyRequest) returns (GetCurrentUserResponse);
   rpc SignOut (EmptyRequest) returns (SignOutResponse);
+  rpc RegisterUser (UserRegistrationRequest) returns (UserRegistrationResponse);
 }
 
 // UUID message for ID representation
@@ -86,4 +87,18 @@ message User {
   google.protobuf.Timestamp updated_at = 11;
   optional google.protobuf.Timestamp last_login_at = 12;
   optional string last_login_ip = 13;
+}
+
+message UserRegistrationRequest {
+  string email = 1;
+  string password = 2;
+  string password_confirmation = 3;
+  string given_name = 4;
+  string family_name = 5;
+}
+
+message UserRegistrationResponse {
+  bool success = 1;
+  repeated ErrorMessage errors = 2;
+  optional User user = 3;
 }

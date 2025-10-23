@@ -9,12 +9,17 @@ public class TestFactory(AppDbContext dbContext)
     public const string ValidPassword = "example password";
     private static readonly string PasswordHash = Argon2.Hash(ValidPassword, 1, 16 * 1024);
 
-    public async Task<User> CreateUser(Action<User>? overrides = null)
+    public static string UniqueEmail()
     {
         var rand = Convert.ToHexStringLower(RandomNumberGenerator.GetBytes(3));
+        return $"example-{rand}@example.com";
+    }
+
+    public async Task<User> CreateUser(Action<User>? overrides = null)
+    {
         var user = new User
         {
-            Email = $"example-{rand}@example.com",
+            Email = UniqueEmail(),
             GivenName = "Example",
             FamilyName = "User",
             PasswordHash = PasswordHash,

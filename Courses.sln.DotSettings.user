@@ -6,6 +6,9 @@
   &lt;TestAncestor&gt;
     &lt;TestId&gt;xUnit::D7EB0B97-06A3-41D7-A795-FA1CE4906F83::net9.0::Courses.Tests.Api.SignInTest.Test_GetCurrentUser&lt;/TestId&gt;
     &lt;TestId&gt;xUnit::D7EB0B97-06A3-41D7-A795-FA1CE4906F83::net9.0::Courses.Tests.Api.SignInTest.Test_SignOut&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::D7EB0B97-06A3-41D7-A795-FA1CE4906F83::net9.0::Courses.Tests.Repositories.UserRepositoryTest.Test_RegisterUser&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::D7EB0B97-06A3-41D7-A795-FA1CE4906F83::net9.0::Courses.Tests.Api.SignUpTest.Test_SignUp&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::D7EB0B97-06A3-41D7-A795-FA1CE4906F83::net9.0::Courses.Tests.Api.SignUpTest.Test_SignUpWithInvalidParams&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String>
 	</wpf:ResourceDictionary>

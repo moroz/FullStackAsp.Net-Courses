@@ -1,9 +1,12 @@
 using Courses.Grpc;
 using Courses.Middleware;
+using Courses.Models;
 using Courses.Repository;
 using Google.Protobuf;
+using Google.Protobuf.Collections;
 using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
+using User = Courses.Grpc.User;
 
 namespace Courses.Services;
 
@@ -53,22 +56,7 @@ public partial class CoursesService
 
         return Task.FromResult(new GetCurrentUserResponse
         {
-            User = new User
-            {
-                Id = new UUID { Value = user.Id.ToString(), },
-                Email = user.Email,
-                Company = user.Company ?? "",
-                Country = user.Country ?? "",
-                CreatedAt = Timestamp.FromDateTime(user.CreatedAt),
-                FamilyName = user.FamilyName,
-                GivenName = user.GivenName,
-                LastLoginAt = user.LastLoginAt == null ? null : Timestamp.FromDateTime((DateTime)user.LastLoginAt),
-                LastLoginIp = user.LastLoginIp?.ToString() ?? "",
-                Organization = user.Organization ?? "",
-                Profession = user.Profession ?? "",
-                Salutation = user.Salutation ?? "",
-                UpdatedAt = Timestamp.FromDateTime(user.UpdatedAt)
-            }
+            User = user.ToGrpcUser()
         });
     }
 
@@ -87,6 +75,32 @@ public partial class CoursesService
         return new SignOutResponse
         {
             Success = await repo.RevokeAccessToken(token),
+        };
+    }
+
+    public override async Task<UserRegistrationResponse> RegisterUser(UserRegistrationRequest request,
+        ServerCallContext context)
+    {
+        var repo = new UserRepository(dbContext);
+        var (user, result) = await repo.RegisterUser(new UserRegistrationParams
+        {
+            Email = request.Email,
+            GivenName = request.GivenName,
+            FamilyName = request.FamilyName,
+            Password = request.Password,
+            PasswordConfirmation = request.PasswordConfirmation
+        });
+
+        var errors = result?.Errors.Select(e => new ErrorMessage
+        {
+            Key = e.PropertyName, Msg = e.ErrorMessage,
+        }) ?? [];
+
+        return new UserRegistrationResponse
+        {
+            Success = user != null,
+            Errors = { errors },
+            User = user?.ToGrpcUser(),
         };
     }
 }
