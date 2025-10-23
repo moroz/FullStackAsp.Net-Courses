@@ -2,7 +2,7 @@
 
 set -e
 
-DOCKER_COMPOSE_PATH=/usr/local/homeosapiens/compose.yaml
+DOCKER_COMPOSE_PATH=/usr/local/lib/homeosapiens/compose.yaml
 AWS_ACCOUNT_ID="${AWS_ACCOUNT_ID:-381492259594}"
 AWS_DEFAULT_REGION="${AWS_DEFAULT_REGION:-ap-northeast-1}"
 
