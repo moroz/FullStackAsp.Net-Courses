@@ -13,6 +13,8 @@ export default {
 			email: "Email:",
 			password: "Create password:",
 			confirm_password: "Confirm password:",
+			given_name: "Given name:",
+			family_name: "Family name:",
 			already_have_an_account_html: `Already have an account? <a href="{{path}}">Sign in</a>`,
 			submit: "Sign up",
 		},

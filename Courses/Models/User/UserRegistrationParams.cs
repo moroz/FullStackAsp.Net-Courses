@@ -1,4 +1,5 @@
 using FluentValidation;
+using FluentValidation.Validators;
 using Microsoft.EntityFrameworkCore;
 
 namespace Courses.Models;
@@ -20,7 +21,7 @@ public class UserRegistrationParamsValidator : AbstractValidator<UserRegistratio
     {
         _dbContext = dbContext;
 
-        RuleFor(u => u.Email).EmailAddress().NotEmpty().MustAsync(BeUniqueEmail);
+        RuleFor(u => u.Email).Matches(@"^[\w\-\.]+@([\w-]+\.)+[\w-]{2,}$").NotEmpty().MustAsync(BeUniqueEmail);
         RuleFor(u => u.GivenName).NotNull();
         RuleFor(u => u.FamilyName).NotNull();
         RuleFor(u => u.Password).Length(8, 128).Equal(u => u.PasswordConfirmation);

@@ -26,7 +26,7 @@ export const actions = {
 			return { success: false, errors: result?.errors };
 		}
 	},
-	signOut: async ({ locals, request, cookies }) => {
+	signOut: async ({ locals, cookies }) => {
 		const { accessToken: token, ...session } = locals.session;
 		if (!token) {
 			return redirect(303, "/");

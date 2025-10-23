@@ -1,5 +1,4 @@
 using Courses.Grpc;
-using Courses.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Courses.Tests.Api;

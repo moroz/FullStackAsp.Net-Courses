@@ -13,6 +13,8 @@ import type { SignInWithPasswordRequest as _courses_SignInWithPasswordRequest, S
 import type { SignOutResponse as _courses_SignOutResponse, SignOutResponse__Output as _courses_SignOutResponse__Output } from './courses/SignOutResponse';
 import type { UUID as _courses_UUID, UUID__Output as _courses_UUID__Output } from './courses/UUID';
 import type { User as _courses_User, User__Output as _courses_User__Output } from './courses/User';
+import type { UserRegistrationRequest as _courses_UserRegistrationRequest, UserRegistrationRequest__Output as _courses_UserRegistrationRequest__Output } from './courses/UserRegistrationRequest';
+import type { UserRegistrationResponse as _courses_UserRegistrationResponse, UserRegistrationResponse__Output as _courses_UserRegistrationResponse__Output } from './courses/UserRegistrationResponse';
 import type { BoolValue as _google_protobuf_BoolValue, BoolValue__Output as _google_protobuf_BoolValue__Output } from './google/protobuf/BoolValue';
 import type { BytesValue as _google_protobuf_BytesValue, BytesValue__Output as _google_protobuf_BytesValue__Output } from './google/protobuf/BytesValue';
 import type { DoubleValue as _google_protobuf_DoubleValue, DoubleValue__Output as _google_protobuf_DoubleValue__Output } from './google/protobuf/DoubleValue';
@@ -42,6 +44,8 @@ export interface ProtoGrpcType {
     SignOutResponse: MessageTypeDefinition<_courses_SignOutResponse, _courses_SignOutResponse__Output>
     UUID: MessageTypeDefinition<_courses_UUID, _courses_UUID__Output>
     User: MessageTypeDefinition<_courses_User, _courses_User__Output>
+    UserRegistrationRequest: MessageTypeDefinition<_courses_UserRegistrationRequest, _courses_UserRegistrationRequest__Output>
+    UserRegistrationResponse: MessageTypeDefinition<_courses_UserRegistrationResponse, _courses_UserRegistrationResponse__Output>
   }
   google: {
     protobuf: {

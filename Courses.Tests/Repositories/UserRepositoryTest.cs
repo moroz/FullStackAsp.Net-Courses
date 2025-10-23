@@ -2,6 +2,7 @@ using Courses.Models;
 using Courses.Repository;
 using Isopoh.Cryptography.Argon2;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Courses.Tests.Repositories;
@@ -72,8 +73,48 @@ public class UserRepositoryTest(GlobalTestFixture fixture) : DbTestBase(fixture)
         Assert.True(user.IsValidPassword(request.Password));
     }
 
-    [Fact]
-    public async Task Test_RegisterUserWithInvalidParams()
+    [Theory]
+    [InlineData("invalid@email", "foobar2000", "foobar2000")]
+    [InlineData("valid-email@example.com", "foobar2000", "does not match")]
+    [InlineData("valid-email@example.com", "short", "short")]
+    public async Task Test_RegisterUserWithInvalidParams(string email, string password, string confirmation)
     {
+        var repo = new UserRepository(DbContext);
+        var request = new UserRegistrationParams
+        {
+            Email = email,
+            GivenName = "Example",
+            FamilyName = "User",
+            Password = password,
+            PasswordConfirmation = confirmation
+        };
+
+        var (user, validationResult) = await repo.RegisterUser(request);
+        Assert.Null(user);
+        Assert.NotNull(validationResult);
+        Assert.False(validationResult.IsValid);
+        Assert.NotEmpty(validationResult.Errors);
+    }
+
+    [Fact]
+    public async Task Test_RegisterUserWithDuplicateEmail()
+    {
+        var existing = await Factory.CreateUser();
+        var request = new UserRegistrationParams
+        {
+            Email = existing.Email,
+            Password = TestFactory.ValidPassword,
+            PasswordConfirmation = TestFactory.ValidPassword,
+            GivenName = "Example",
+            FamilyName = "User"
+        };
+
+        var repo = new UserRepository(DbContext);
+        var (user, validationResult) = await repo.RegisterUser(request);
+        Assert.Null(user);
+        Assert.NotNull(validationResult);
+        Assert.False(validationResult.IsValid);
+        Assert.NotEmpty(validationResult.Errors);
+        Assert.Equal("Email", validationResult.Errors.First().PropertyName);
     }
 }

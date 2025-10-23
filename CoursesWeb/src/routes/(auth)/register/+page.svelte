@@ -9,13 +9,25 @@
 
 	<InputField name="email" type="email" labelKey="common.users.new.email" autocomplete="email" />
 	<InputField
+		name="givenName"
+		type="text"
+		labelKey="common.users.new.given_name"
+		autocomplete="given-name"
+	/>
+	<InputField
+		name="familyName"
+		type="text"
+		labelKey="common.users.new.family_name"
+		autocomplete="family-name"
+	/>
+	<InputField
 		name="password"
 		type="password"
 		labelKey="common.users.new.password"
 		autocomplete="new-password"
 	/>
 	<InputField
-		name="confirm_password"
+		name="passwordConfirmation"
 		type="password"
 		labelKey="common.users.new.confirm_password"
 		autocomplete="new-password"
