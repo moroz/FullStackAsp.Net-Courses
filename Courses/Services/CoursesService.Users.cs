@@ -93,7 +93,7 @@ public partial class CoursesService
 
         var errors = result?.Errors.Select(e => new ErrorMessage
         {
-            Key = e.PropertyName, Msg = e.ErrorMessage,
+            Key = e.PropertyName[..1].ToLower() + e.PropertyName[1..], Msg = e.ErrorMessage,
         }) ?? [];
 
         return new UserRegistrationResponse

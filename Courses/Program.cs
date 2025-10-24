@@ -3,6 +3,7 @@ using Courses.Middleware;
 using Courses.Models;
 using Courses.Repository;
 using Courses.Services;
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -20,6 +21,8 @@ builder.Services.AddDbContext<AppDbContext>(options =>
         .UseNpgsql(builder.Configuration.GetConnectionString("AppDbContext"))
         .UseSnakeCaseNamingConvention();
 });
+
+ValidatorOptions.Global.LanguageManager = new ValidatorLanguageManager();
 
 var app = builder.Build();
 

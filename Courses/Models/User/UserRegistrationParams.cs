@@ -21,7 +21,9 @@ public class UserRegistrationParamsValidator : AbstractValidator<UserRegistratio
     {
         _dbContext = dbContext;
 
-        RuleFor(u => u.Email).Matches(@"^[\w\-\.]+@([\w-]+\.)+[\w-]{2,}$").NotEmpty().MustAsync(BeUniqueEmail);
+        RuleFor(u => u.Email).NotEmpty().Matches(@"^[\w\-\.]+@([\w-]+\.)+[\w-]{2,}$")
+            .WithMessage("is not a valid email address");
+        RuleFor(u => u.Email).MustAsync(BeUniqueEmail).WithMessage("has already been taken");
         RuleFor(u => u.GivenName).NotNull();
         RuleFor(u => u.FamilyName).NotNull();
         RuleFor(u => u.Password).Length(8, 128).Equal(u => u.PasswordConfirmation);

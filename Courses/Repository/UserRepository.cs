@@ -2,6 +2,7 @@ using Courses.Models;
 using Isopoh.Cryptography.Argon2;
 using Microsoft.EntityFrameworkCore;
 using FluentValidation.Results;
+using Microsoft.Extensions.Localization;
 
 namespace Courses.Repository;
 
