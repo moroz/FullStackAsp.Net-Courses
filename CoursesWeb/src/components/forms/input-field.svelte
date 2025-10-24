@@ -5,11 +5,20 @@
 
 	interface Props extends HTMLInputAttributes {
 		labelKey: string;
+		helperText?: string;
 		class?: string;
 		error?: string | string[] | null;
 	}
 
-	let { name, labelKey, value = $bindable(), class: className, error, ...rest }: Props = $props();
+	let {
+		name,
+		labelKey,
+		helperText,
+		value = $bindable(),
+		class: className,
+		error,
+		...rest
+	}: Props = $props();
 
 	let resolvedError = $derived.by(() => {
 		if (typeof error === "string") {
@@ -22,7 +31,7 @@
 	});
 </script>
 
-<label class="grid gap-1">
+<label class="grid">
 	<span class="leading-tight font-bold">{$t(labelKey)}</span>
 	<input
 		type="text"
@@ -38,5 +47,8 @@
 	/>
 	{#if resolvedError}
 		<span class="error-explanation text-sm text-red-900">{error}</span>
+	{/if}
+	{#if helperText}
+		<span class="text-sm text-slate-600">{helperText}</span>
 	{/if}
 </label>

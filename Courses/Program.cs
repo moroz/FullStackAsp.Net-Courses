@@ -1,9 +1,11 @@
+using System.Globalization;
 using Courses;
 using Courses.Middleware;
 using Courses.Models;
 using Courses.Repository;
 using Courses.Services;
 using FluentValidation;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -22,9 +24,20 @@ builder.Services.AddDbContext<AppDbContext>(options =>
         .UseSnakeCaseNamingConvention();
 });
 
+var supportedCultures = new[] { "en-US", "pl-PL" };
+
+builder.Services.Configure<RequestLocalizationOptions>(options =>
+{
+    options.DefaultRequestCulture = new RequestCulture("en-US");
+    options.SupportedCultures = supportedCultures.Select(c => new CultureInfo(c)).ToList();
+    options.SupportedUICultures = supportedCultures.Select(c => new CultureInfo(c)).ToList();
+});
+
 ValidatorOptions.Global.LanguageManager = new ValidatorLanguageManager();
 
 var app = builder.Build();
+
+app.UseRequestLocalization();
 
 if (args.Contains("seed"))
 {

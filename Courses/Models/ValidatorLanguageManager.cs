@@ -4,7 +4,7 @@ public class ValidatorLanguageManager : FluentValidation.Resources.LanguageManag
 {
     public ValidatorLanguageManager()
     {
-        AddTranslation("en", "NotNullValidator", "can't be blank");
-        AddTranslation("pl", "NotNullValidator", "to pole jest wymagane");
+        AddTranslation("en-US", "NotEmptyValidator", "can't be blank");
+        AddTranslation("pl-PL", "NotEmptyValidator", "to pole jest wymagane");
     }
 }

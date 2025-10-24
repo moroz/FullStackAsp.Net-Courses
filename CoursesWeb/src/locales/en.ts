@@ -11,12 +11,15 @@ export default {
 		new: {
 			header: "Sign up",
 			email: "Email:",
-			password: "Create password:",
+			password: "Choose a password:",
 			confirm_password: "Confirm password:",
 			given_name: "Given name:",
 			family_name: "Family name:",
 			already_have_an_account_html: `Already have an account? <a href="{{path}}">Sign in</a>`,
 			submit: "Sign up",
+			helpers: {
+				password: "{{min}}–{{max}} characters",
+			},
 		},
 	},
 	sessions: {
