@@ -13,5 +13,6 @@ export const actions = {
 		) as UserRegistrationRequest;
 		const result = await registerUser(params);
 		console.log(result);
+		return { errors: result?.errors ?? [] };
 	},
 } satisfies Actions;

@@ -6,9 +6,20 @@
 	interface Props extends HTMLInputAttributes {
 		labelKey: string;
 		class?: string;
+		error?: string | string[] | null;
 	}
 
-	let { name, labelKey, value = $bindable(), class: className, ...rest }: Props = $props();
+	let { name, labelKey, value = $bindable(), class: className, error, ...rest }: Props = $props();
+
+	let resolvedError = $derived.by(() => {
+		if (typeof error === "string") {
+			return error;
+		}
+		if (Array.isArray(error)) {
+			return error[0] ?? null;
+		}
+		return null;
+	});
 </script>
 
 <label class="grid gap-1">
@@ -17,7 +28,15 @@
 		type="text"
 		bind:value
 		{name}
-		class={twMerge("h-10 rounded-sm border border-slate-500 px-3", className)}
+		aria-invalid={error ? "true" : undefined}
+		class={twMerge(
+			"h-10 rounded-sm border border-slate-500 px-3",
+			error && "border-red-500",
+			className,
+		)}
 		{...rest}
 	/>
+	{#if resolvedError}
+		<span class="error-explanation text-sm text-red-900">{error}</span>
+	{/if}
 </label>
