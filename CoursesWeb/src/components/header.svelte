@@ -30,7 +30,9 @@
 
 <header class="fixed inset-0 bottom-[unset] z-10 h-header bg-slate-100 text-black shadow">
 	<div class="container mx-auto flex h-full items-center justify-between">
-		<a href="/"><h1 class="text-4xl font-bold text-primary">Homeo sapiens</h1></a>
+		<h1 class="text-4xl font-bold text-primary transition-colors hover:text-primary-800">
+			<a href="/"> Homeo sapiens </a>
+		</h1>
 		<nav>
 			<ul class="flex gap-1 py-4">
 				<li><LanguageSwitcher {locale} {pathname} class="navbar-item h-full uppercase" /></li>

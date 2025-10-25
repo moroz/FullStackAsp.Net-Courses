@@ -1,5 +1,4 @@
 using FluentValidation;
-using FluentValidation.Validators;
 using Microsoft.EntityFrameworkCore;
 
 namespace Courses.Models;

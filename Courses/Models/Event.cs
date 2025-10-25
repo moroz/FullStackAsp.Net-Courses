@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Courses.Models;
 
-public class Event
+public class Event : IHasTimestamp
 {
     public Guid Id { get; set; } = Guid.CreateVersion7();
     public DateTime StartsAt { get; set; }
@@ -20,6 +20,8 @@ public class Event
 
     // ReSharper disable once EntityFramework.ModelValidation.UnlimitedStringLength
     [MaxLength] public string? DescriptionPl { get; set; }
+
+    public virtual ICollection<Host>? Hosts { get; set; }
 
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;

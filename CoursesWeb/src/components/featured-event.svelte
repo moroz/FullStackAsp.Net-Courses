@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { Event } from "@api/interfaces";
 	import { MapPin } from "lucide-svelte";
+	import { locale } from "$lib/translations";
 
 	interface Props {
 		event: Event;
@@ -23,5 +24,11 @@
 		{/if}
 	</div>
 	<div class="text-primary"></div>
-	<h3 class="text-4xl font-bold text-primary">{event.titleEn}</h3>
+	<h3 class="text-4xl font-bold text-primary">
+		{#if $locale === "pl-PL" && event.titlePl}
+			{event.titlePl}
+		{:else}
+			{event.titleEn}
+		{/if}
+	</h3>
 </article>

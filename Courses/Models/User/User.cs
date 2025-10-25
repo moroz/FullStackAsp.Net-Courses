@@ -9,19 +9,18 @@ using Microsoft.EntityFrameworkCore;
 namespace Courses.Models;
 
 [Index(nameof(Email), IsUnique = true)]
-public class User
+public class User : IHasTimestamp
 {
     public Guid Id { get; set; } = Guid.CreateVersion7();
 
     [Column(TypeName = "citext")]
-    [Required]
     [EmailAddress]
     public required string Email { get; set; }
 
     [StringLength(10)] public string? Salutation { get; set; }
 
-    [StringLength(255)] [Required] public required string GivenName { get; set; }
-    [StringLength(255)] [Required] public required string FamilyName { get; set; }
+    [StringLength(255)] public required string GivenName { get; set; }
+    [StringLength(255)] public required string FamilyName { get; set; }
 
     public string? Country { get; set; }
     [StringLength(255)] public string? Profession { get; set; }
