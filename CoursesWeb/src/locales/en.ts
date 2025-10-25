@@ -1,4 +1,7 @@
 export default {
+	forms: {
+		required_title: "required field",
+	},
 	header: {
 		nav: {
 			sign_in: "Sign in",

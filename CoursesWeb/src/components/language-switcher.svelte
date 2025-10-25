@@ -10,11 +10,13 @@
 	}
 
 	const { locale, pathname, class: className, full }: Props = $props();
-	const otherLocale = locale === "pl" ? "en" : "pl";
+	const otherLocale = locale === "pl-PL" ? "en-US" : "pl-PL";
 	const href = `${pathname}?lang=${otherLocale}`;
-	const title = new Intl.DisplayNames(otherLocale, { type: "language" }).of(otherLocale);
+	const title = new Intl.DisplayNames(otherLocale, { type: "language" }).of(
+		otherLocale.slice(0, 2),
+	);
 </script>
 
 <a {href} class={className} {title} data-sveltekit-reload>
-	{full ? title : otherLocale}
+	{full ? title : otherLocale.slice(0, 2)}
 </a>

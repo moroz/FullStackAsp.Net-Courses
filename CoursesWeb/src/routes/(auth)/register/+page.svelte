@@ -21,7 +21,7 @@
 	let errors = $derived.by(() => transformErrors(form?.errors ?? []));
 </script>
 
-<form method="POST" class="grid gap-4" use:enhance>
+<form method="POST" class="grid gap-4" use:enhance novalidate>
 	<h2 class="text-center text-xl font-bold lg:text-2xl">{$t("common.users.new.header")}</h2>
 
 	<InputField
@@ -30,6 +30,7 @@
 		labelKey="common.users.new.email"
 		autocomplete="email"
 		error={errors.email}
+		required
 	/>
 	<InputField
 		name="givenName"
@@ -37,6 +38,7 @@
 		labelKey="common.users.new.given_name"
 		autocomplete="given-name"
 		error={errors.givenName}
+		required
 	/>
 	<InputField
 		name="familyName"
@@ -44,6 +46,7 @@
 		labelKey="common.users.new.family_name"
 		autocomplete="family-name"
 		error={errors.familyName}
+		required
 	/>
 	<InputField
 		name="password"
@@ -52,6 +55,7 @@
 		helperText={$t("common.users.new.helpers.password", { min: 8, max: 128 })}
 		autocomplete="new-password"
 		error={errors.password}
+		required
 	/>
 	<InputField
 		name="passwordConfirmation"
@@ -59,6 +63,7 @@
 		labelKey="common.users.new.confirm_password"
 		autocomplete="new-password"
 		error={errors.passwordConfirmation}
+		required
 	/>
 
 	<button

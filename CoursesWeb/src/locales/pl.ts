@@ -17,6 +17,9 @@ export default {
 			family_name: "Nazwisko:",
 			already_have_an_account_html: `Masz już konto? <a href="{{path}}">Zaloguj się</a>`,
 			submit: "Zarejestruj się",
+			helpers: {
+				password: "{{min}}-{{max}} znaków",
+			},
 		},
 	},
 	sessions: {

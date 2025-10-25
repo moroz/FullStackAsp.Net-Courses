@@ -4,10 +4,10 @@ import type { UserRegistrationRequest } from "@api/proto/courses/UserRegistratio
 import { fail } from "@sveltejs/kit";
 
 export const actions = {
-	default: async ({ request }) => {
+	default: async ({ request, locals }) => {
 		const formData = await request.formData();
 		const params = Object.fromEntries(formData) as UserRegistrationRequest;
-		const result = await registerUser(params);
+		const result = await registerUser(params, locals.locale);
 		if (!result?.success) {
 			return fail(422, { success: false, errors: result?.errors });
 		}
