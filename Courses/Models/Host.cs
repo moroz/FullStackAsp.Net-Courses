@@ -12,7 +12,8 @@ public class Host : IHasTimestamp
 
     [MaxLength(255)] public required string FamilyName { get; set; }
 
-    public virtual ICollection<Event>? Events { get; set; }
+    public List<EventHost> EventHosts { get; } = [];
+    public List<Event> Events { get; } = [];
 
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;

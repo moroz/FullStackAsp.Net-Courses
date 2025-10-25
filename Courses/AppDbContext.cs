@@ -22,4 +22,14 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
 
         return base.SaveChanges();
     }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
+
+        modelBuilder.Entity<Models.Event>()
+            .HasMany(e => e.Hosts)
+            .WithMany(h => h.Events)
+            .UsingEntity<EventHost>();
+    }
 }
