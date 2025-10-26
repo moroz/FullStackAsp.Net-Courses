@@ -3,6 +3,7 @@
 import type { UUID as _courses_UUID, UUID__Output as _courses_UUID__Output } from '../courses/UUID';
 import type { StringValue as _google_protobuf_StringValue, StringValue__Output as _google_protobuf_StringValue__Output } from '../google/protobuf/StringValue';
 import type { Timestamp as _google_protobuf_Timestamp, Timestamp__Output as _google_protobuf_Timestamp__Output } from '../google/protobuf/Timestamp';
+import type { Host as _courses_Host, Host__Output as _courses_Host__Output } from '../courses/Host';
 
 export interface Event {
   'id'?: (_courses_UUID | null);
@@ -16,6 +17,7 @@ export interface Event {
   'descriptionPl'?: (_google_protobuf_StringValue | null);
   'isVirtual'?: (boolean);
   'venue'?: (_google_protobuf_StringValue | null);
+  'hosts'?: (_courses_Host)[];
 }
 
 export interface Event__Output {
@@ -30,4 +32,5 @@ export interface Event__Output {
   'descriptionPl': (_google_protobuf_StringValue__Output | null);
   'isVirtual': (boolean);
   'venue': (_google_protobuf_StringValue__Output | null);
+  'hosts': (_courses_Host__Output)[];
 }

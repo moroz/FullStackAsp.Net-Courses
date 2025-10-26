@@ -6,6 +6,7 @@ import type { EmptyRequest as _courses_EmptyRequest, EmptyRequest__Output as _co
 import type { ErrorMessage as _courses_ErrorMessage, ErrorMessage__Output as _courses_ErrorMessage__Output } from './courses/ErrorMessage';
 import type { Event as _courses_Event, Event__Output as _courses_Event__Output } from './courses/Event';
 import type { GetCurrentUserResponse as _courses_GetCurrentUserResponse, GetCurrentUserResponse__Output as _courses_GetCurrentUserResponse__Output } from './courses/GetCurrentUserResponse';
+import type { Host as _courses_Host, Host__Output as _courses_Host__Output } from './courses/Host';
 import type { ListEventsRequest as _courses_ListEventsRequest, ListEventsRequest__Output as _courses_ListEventsRequest__Output } from './courses/ListEventsRequest';
 import type { ListEventsResponse as _courses_ListEventsResponse, ListEventsResponse__Output as _courses_ListEventsResponse__Output } from './courses/ListEventsResponse';
 import type { SignInResponse as _courses_SignInResponse, SignInResponse__Output as _courses_SignInResponse__Output } from './courses/SignInResponse';
@@ -37,6 +38,7 @@ export interface ProtoGrpcType {
     ErrorMessage: MessageTypeDefinition<_courses_ErrorMessage, _courses_ErrorMessage__Output>
     Event: MessageTypeDefinition<_courses_Event, _courses_Event__Output>
     GetCurrentUserResponse: MessageTypeDefinition<_courses_GetCurrentUserResponse, _courses_GetCurrentUserResponse__Output>
+    Host: MessageTypeDefinition<_courses_Host, _courses_Host__Output>
     ListEventsRequest: MessageTypeDefinition<_courses_ListEventsRequest, _courses_ListEventsRequest__Output>
     ListEventsResponse: MessageTypeDefinition<_courses_ListEventsResponse, _courses_ListEventsResponse__Output>
     SignInResponse: MessageTypeDefinition<_courses_SignInResponse, _courses_SignInResponse__Output>

@@ -21,7 +21,7 @@ public class Event : IHasTimestamp
     // ReSharper disable once EntityFramework.ModelValidation.UnlimitedStringLength
     [MaxLength] public string? DescriptionPl { get; set; }
 
-    public List<EventHost> EventHosts { get; } = [];
+    public List<EventHost> EventHosts { get; set; } = [];
     public List<Host> Hosts { get; } = [];
 
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;

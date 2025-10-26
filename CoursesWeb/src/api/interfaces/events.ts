@@ -1,4 +1,5 @@
 import type { ID, ISOTimestamp } from "./common";
+import type { Host } from "./hosts";
 
 export interface Event {
 	id: ID;
@@ -12,4 +13,5 @@ export interface Event {
 	descriptionPl: string | null;
 	descriptionEn: string;
 	isVirtual: boolean;
+	hosts: Host[];
 }

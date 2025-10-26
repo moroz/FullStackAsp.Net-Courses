@@ -13,6 +13,7 @@
       &lt;TestId&gt;xUnit::D7EB0B97-06A3-41D7-A795-FA1CE4906F83::net9.0::Courses.Tests.Repositories.UserRepositoryTest.Test_RegisterUserWithInvalidParams&lt;/TestId&gt;
       &lt;TestId&gt;xUnit::D7EB0B97-06A3-41D7-A795-FA1CE4906F83::net9.0::Courses.Tests.Repositories.UserTokenRepositoryTest.Test_IssueAccessTokenForUser&lt;/TestId&gt;
       &lt;TestId&gt;xUnit::D7EB0B97-06A3-41D7-A795-FA1CE4906F83::net9.0::Courses.Tests.Repositories.UserRepositoryTest.Test_RegisterUserWithDuplicateEmail&lt;/TestId&gt;
+      &lt;TestId&gt;xUnit::D7EB0B97-06A3-41D7-A795-FA1CE4906F83::net9.0::Courses.Tests.Repositories.EventRepositoryTest.Test_SelectEventListDto&lt;/TestId&gt;
     &lt;/TestAncestor&gt;
     &lt;ProjectFile&gt;D7EB0B97-06A3-41D7-A795-FA1CE4906F83/d:Api/f:SignUpTest.cs&lt;/ProjectFile&gt;
   &lt;/Or&gt;

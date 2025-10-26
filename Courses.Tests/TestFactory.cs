@@ -27,8 +27,24 @@ public class TestFactory(AppDbContext dbContext)
 
         overrides?.Invoke(user);
 
-        await dbContext.AddAsync(user);
+        dbContext.Add(user);
         await dbContext.SaveChangesAsync();
         return user;
+    }
+
+    public async Task<Host> CreateHost(Action<Host>? overrides = null)
+    {
+        var host = new Host
+        {
+            GivenName = "John",
+            FamilyName = "Doe",
+            Salutation = "Dr.",
+        };
+
+        overrides?.Invoke(host);
+
+        dbContext.Add(host);
+        await dbContext.SaveChangesAsync();
+        return host;
     }
 }

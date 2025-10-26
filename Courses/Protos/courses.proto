@@ -17,17 +17,7 @@ service CoursesApi {
   rpc RegisterUser (UserRegistrationRequest) returns (UserRegistrationResponse);
 }
 
-// UUID message for ID representation
-message UUID {
-  string value = 1;
-}
-
-message ErrorMessage {
-  string key = 1;
-  string msg = 2;
-}
-
-// Event representation
+// Concrete DB models
 message Event {
   UUID id = 1;
   string title_en = 2;
@@ -40,7 +30,44 @@ message Event {
   google.protobuf.StringValue description_pl = 9;
   bool is_virtual = 10;
   google.protobuf.StringValue venue = 11;
+  repeated Host hosts = 12;
 }
+
+message User {
+  UUID id = 1;
+  string email = 2;
+  optional string salutation = 3;
+  string given_name = 4;
+  string family_name = 5;
+  optional string country = 6;
+  optional string profession = 7;
+  optional string organization = 8;
+  optional string company = 9;
+  google.protobuf.Timestamp created_at = 10;
+  google.protobuf.Timestamp updated_at = 11;
+  optional google.protobuf.Timestamp last_login_at = 12;
+  optional string last_login_ip = 13;
+}
+
+message Host {
+  UUID id = 1;
+  optional string salutation = 2;
+  string given_name = 3;
+  string family_name = 4;
+  google.protobuf.Timestamp created_at = 5;
+  google.protobuf.Timestamp updated_at = 6;
+}
+
+// UUID message for ID representation
+message UUID {
+  string value = 1;
+}
+
+message ErrorMessage {
+  string key = 1;
+  string msg = 2;
+}
+
 
 message EmptyRequest {}
 
@@ -71,22 +98,6 @@ message SignOutResponse {
 
 message GetCurrentUserResponse {
   optional User user = 1;
-}
-
-message User {
-  UUID id = 1;
-  string email = 2;
-  optional string salutation = 3;
-  string given_name = 4;
-  string family_name = 5;
-  optional string country = 6;
-  optional string profession = 7;
-  optional string organization = 8;
-  optional string company = 9;
-  google.protobuf.Timestamp created_at = 10;
-  google.protobuf.Timestamp updated_at = 11;
-  optional google.protobuf.Timestamp last_login_at = 12;
-  optional string last_login_ip = 13;
 }
 
 message UserRegistrationRequest {

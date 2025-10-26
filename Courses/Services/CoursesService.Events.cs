@@ -14,21 +14,7 @@ public partial class CoursesService(ILogger<CoursesService> logger, AppDbContext
     {
         var repo = new EventRepository(dbContext);
         var events = await repo.ListEvents();
-        var list = events.Select(e => new Event
-            {
-                TitleEn = e.TitleEn,
-                TitlePl = e.TitlePl,
-                StartsAt = Timestamp.FromDateTime(e.StartsAt),
-                EndsAt = Timestamp.FromDateTime(e.EndsAt),
-                CreatedAt = Timestamp.FromDateTime(e.CreatedAt),
-                UpdatedAt = Timestamp.FromDateTime(e.UpdatedAt),
-                IsVirtual = e.IsVirtual,
-                DescriptionEn = e.DescriptionEn,
-                DescriptionPl = e.DescriptionPl,
-                Venue = e.Venue,
-                Id = new UUID { Value = e.Id.ToString() }
-            })
-            .ToList();
+        var list = events.Select(e => e.ToGrpcEvent());
 
         return new ListEventsResponse
         {

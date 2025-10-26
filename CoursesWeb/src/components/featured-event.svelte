@@ -31,4 +31,7 @@
 			{event.titleEn}
 		{/if}
 	</h3>
+	{#each event.hosts as host}
+		<span>{host.salutation} {host.givenName} {host.familyName}</span>
+	{/each}
 </article>

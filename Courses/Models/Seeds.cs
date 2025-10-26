@@ -9,10 +9,18 @@ public static class Seeds
     {
         await db.Events.ExecuteDeleteAsync();
         await db.Users.ExecuteDeleteAsync();
+        await db.Hosts.ExecuteDeleteAsync();
 
-        var events = new List<Event>
+        var modi = new Host
         {
-            new Event
+            Salutation = "Dr.",
+            GivenName = "Sanjay",
+            FamilyName = "Modi"
+        };
+
+        List<Event> events =
+        [
+            new()
             {
                 Id = new Guid("0199c2f2-528b-7e88-96e3-5e5088333a8c"),
                 TitleEn = "To Perfect the Art of Homeopathy",
@@ -23,7 +31,8 @@ public static class Seeds
                 IsVirtual = true,
                 Venue = "Poznań, Hotel IOR"
             },
-            new Event
+
+            new()
             {
                 Id = new Guid("0199c2fa-7e9d-72f6-ada1-88b5d04d9a58"),
                 TitleEn = "Perfect the Art of Homeopathy 2",
@@ -35,9 +44,29 @@ public static class Seeds
                 Venue = "Kraków, Poland",
                 IsVirtual = true
             }
+        ];
+
+        events[0].EventHosts = new List<EventHost>
+        {
+            new EventHost
+            {
+                HostId = modi.Id,
+                EventId = events[0].Id,
+                Position = 0
+            }
+        };
+        events[1].EventHosts = new List<EventHost>
+        {
+            new EventHost
+            {
+                HostId = modi.Id,
+                EventId = events[1].Id,
+                Position = 0,
+            }
         };
 
-        await db.Events.AddRangeAsync(events);
+        db.Hosts.Add(modi);
+        db.Events.AddRange(events);
 
         await db.Users.AddAsync(new User
         {
