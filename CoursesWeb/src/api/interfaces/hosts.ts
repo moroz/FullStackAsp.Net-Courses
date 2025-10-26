@@ -5,6 +5,7 @@ export interface Host {
 	salutation: string | null;
 	givenName: string;
 	familyName: string;
+	profilePictureUrl: string | null;
 	createdAt: ISOTimestamp;
 	updatedAt: ISOTimestamp;
 }

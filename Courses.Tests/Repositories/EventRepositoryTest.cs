@@ -9,7 +9,19 @@ public class EventRepositoryTest(GlobalTestFixture fixture) : DbTestBase(fixture
     [Fact]
     public async Task Test_SelectEventListDto()
     {
-        var host1 = await Factory.CreateHost(h => h.FamilyName = "Host 1");
+        var pp = new Asset
+        {
+            ObjectKey = "cm7uqj3q500mglz8z2dqy8sdz.webp",
+        };
+
+        DbContext.Add(pp);
+        await DbContext.SaveChangesAsync();
+
+        var host1 = await Factory.CreateHost(h =>
+        {
+            h.FamilyName = "Host 1";
+            h.ProfilePictureId = pp.Id;
+        });
         var host2 = await Factory.CreateHost(h => h.FamilyName = "Host 2");
 
         var event1 = new Event
@@ -44,5 +56,7 @@ public class EventRepositoryTest(GlobalTestFixture fixture) : DbTestBase(fixture
         var actual = events.Find(e => e.Id == event1.Id);
         Assert.NotNull(actual);
         Assert.Equal(2, actual.Hosts.Count());
+        var actualHost = actual.Hosts.First();
+        Assert.Contains(pp.ObjectKey, actualHost.ProfilePictureUrl);
     }
 }

@@ -23,11 +23,12 @@ export async function listEvents(): Promise<Event[]> {
 		isVirtual: e.isVirtual,
 		hosts: e.hosts.map((h) => ({
 			id: h.id!.value,
-			salutation: h.salutation,
+			salutation: h.salutation ?? null,
 			givenName: h.givenName,
 			familyName: h.familyName,
-			createdAt: timestampToISO(h.createdAt),
-			updatedAt: timestampToISO(h.updatedAt),
+			profilePictureUrl: h.profilePictureUrl ?? null,
+			createdAt: timestampToISO(h.createdAt)!,
+			updatedAt: timestampToISO(h.updatedAt)!,
 		})),
 	}));
 }

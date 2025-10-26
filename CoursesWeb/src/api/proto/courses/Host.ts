@@ -10,7 +10,9 @@ export interface Host {
   'familyName'?: (string);
   'createdAt'?: (_google_protobuf_Timestamp | null);
   'updatedAt'?: (_google_protobuf_Timestamp | null);
+  'profilePictureUrl'?: (string);
   '_salutation'?: "salutation";
+  '_profilePictureUrl'?: "profilePictureUrl";
 }
 
 export interface Host__Output {
@@ -20,5 +22,7 @@ export interface Host__Output {
   'familyName': (string);
   'createdAt': (_google_protobuf_Timestamp__Output | null);
   'updatedAt': (_google_protobuf_Timestamp__Output | null);
+  'profilePictureUrl'?: (string);
   '_salutation'?: "salutation";
+  '_profilePictureUrl'?: "profilePictureUrl";
 }

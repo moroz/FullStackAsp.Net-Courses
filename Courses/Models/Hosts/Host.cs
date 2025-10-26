@@ -12,6 +12,9 @@ public class Host : IHasTimestamp
 
     [MaxLength(255)] public required string FamilyName { get; set; }
 
+    public Guid? ProfilePictureId { get; set; }
+    public Asset? ProfilePicture { get; set; }
+
     public List<EventHost> EventHosts { get; } = [];
     public List<Event> Events { get; } = [];
 

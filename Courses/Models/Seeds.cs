@@ -10,13 +10,23 @@ public static class Seeds
         await db.Events.ExecuteDeleteAsync();
         await db.Users.ExecuteDeleteAsync();
         await db.Hosts.ExecuteDeleteAsync();
+        await db.Assets.ExecuteDeleteAsync();
+
+        var profilePicture = new Asset
+        {
+            ObjectKey = "cm7uqj3q500mglz8z2dqy8sdz.webp",
+            OriginalFilename = "cm7uqj3q500mglz8z2dqy8sdz.webp"
+        };
+        db.Add(profilePicture);
 
         var modi = new Host
         {
             Salutation = "Dr.",
             GivenName = "Sanjay",
-            FamilyName = "Modi"
+            FamilyName = "Modi",
+            ProfilePictureId = profilePicture.Id,
         };
+        db.Add(modi);
 
         List<Event> events =
         [
@@ -65,7 +75,6 @@ public static class Seeds
             }
         };
 
-        db.Hosts.Add(modi);
         db.Events.AddRange(events);
 
         await db.Users.AddAsync(new User

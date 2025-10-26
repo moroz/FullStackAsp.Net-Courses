@@ -56,6 +56,7 @@ message Host {
   string family_name = 4;
   google.protobuf.Timestamp created_at = 5;
   google.protobuf.Timestamp updated_at = 6;
+  optional string profile_picture_url = 7;
 }
 
 // UUID message for ID representation

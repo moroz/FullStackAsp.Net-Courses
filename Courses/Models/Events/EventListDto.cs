@@ -10,7 +10,7 @@ public class EventListDto
     public required string TitleEn { get; set; }
     public required string TitlePl { get; set; }
 
-    public IEnumerable<Host> Hosts { get; set; } = [];
+    public IEnumerable<HostDto> Hosts { get; set; } = [];
     public DateTime StartsAt { get; set; }
     public DateTime EndsAt { get; set; }
     public DateTime CreatedAt { get; set; }
@@ -28,8 +28,7 @@ public class EventListDto
             GivenName = h.GivenName,
             FamilyName = h.FamilyName,
             Salutation = h.Salutation,
-            CreatedAt = Timestamp.FromDateTime(h.CreatedAt),
-            UpdatedAt = Timestamp.FromDateTime(h.UpdatedAt)
+            ProfilePictureUrl = h.ProfilePictureUrl,
         });
 
         return new Grpc.Event
@@ -67,7 +66,16 @@ public static class EventListDtoSelect
             DescriptionPl = e.DescriptionPl ?? "",
             IsVirtual = e.IsVirtual,
             Venue = e.Venue ?? "",
-            Hosts = e.EventHosts.OrderBy(eh => eh.Position).Select(eh => eh.Host),
+            Hosts = e.EventHosts.OrderBy(eh => eh.Position).Select(eh => new
+                HostDto
+                {
+                    FamilyName = eh.Host.FamilyName,
+                    GivenName = eh.Host.GivenName,
+                    Salutation = eh.Host.Salutation,
+                    CreatedAt = eh.CreatedAt,
+                    UpdatedAt = eh.UpdatedAt,
+                    ProfilePictureUrl = eh.Host.ProfilePicture != null ? eh.Host.ProfilePicture.PublicUrl : null,
+                }),
         });
     }
 }
