@@ -17,6 +17,11 @@ service CoursesApi {
   rpc RegisterUser (UserRegistrationRequest) returns (UserRegistrationResponse);
 }
 
+enum EventType {
+  Seminar = 0;
+  Webinar = 1;
+}
+
 // Concrete DB models
 message Event {
   UUID id = 1;
@@ -31,6 +36,7 @@ message Event {
   bool is_virtual = 10;
   google.protobuf.StringValue venue = 11;
   repeated Host hosts = 12;
+  EventType event_type = 13;
 }
 
 message User {

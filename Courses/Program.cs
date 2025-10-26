@@ -22,7 +22,8 @@ builder.Services.Configure<AssetCdnSettings>(builder.Configuration.GetSection("A
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
     options
-        .UseNpgsql(builder.Configuration.GetConnectionString("AppDbContext"))
+        .UseNpgsql(builder.Configuration.GetConnectionString("AppDbContext"),
+            optionsBuilder => { optionsBuilder.MapEnum<EventType>("event_type"); })
         .UseSnakeCaseNamingConvention();
 });
 

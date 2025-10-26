@@ -3,11 +3,18 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Courses.Models;
 
+public enum EventType
+{
+    Seminar,
+    Webinar,
+}
+
 public class Event : IHasTimestamp
 {
     public Guid Id { get; set; } = Guid.CreateVersion7();
     public DateTime StartsAt { get; set; }
     public DateTime EndsAt { get; set; }
+    public EventType EventType { get; set; } = EventType.Seminar;
 
     [MaxLength(255)] public required string TitleEn { get; set; }
     [MaxLength(255)] public string? TitlePl { get; set; }
