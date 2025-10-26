@@ -17,12 +17,15 @@ builder.Services.AddScoped<EventRepository>();
 builder.Services.AddScoped<UserRepository>();
 builder.Services.AddScoped<UserTokenRepository>();
 
+builder.Services.Configure<AssetCdnSettings>(builder.Configuration.GetSection("AssetCdn"));
+
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
     options
         .UseNpgsql(builder.Configuration.GetConnectionString("AppDbContext"))
         .UseSnakeCaseNamingConvention();
 });
+
 
 var supportedCultures = new[] { "en-US", "pl-PL" };
 
