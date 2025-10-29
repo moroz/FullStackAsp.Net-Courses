@@ -20,7 +20,9 @@ public class Event : IHasTimestamp
     [MaxLength(255)] public string? TitlePl { get; set; }
 
     public bool IsVirtual { get; set; }
-    [MaxLength(255)] public string? Venue { get; set; }
+
+    public Venue? Venue { get; set; }
+    public Guid? VenueId { get; set; }
 
     // ReSharper disable once EntityFramework.ModelValidation.UnlimitedStringLength
     [MaxLength] public required string DescriptionEn { get; set; }

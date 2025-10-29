@@ -1,5 +1,5 @@
 import type * as grpc from '@grpc/grpc-js';
-import type { MessageTypeDefinition } from '@grpc/proto-loader';
+import type { EnumTypeDefinition, MessageTypeDefinition } from '@grpc/proto-loader';
 
 import type { CoursesApiClient as _courses_CoursesApiClient, CoursesApiDefinition as _courses_CoursesApiDefinition } from './courses/CoursesApi';
 import type { EmptyRequest as _courses_EmptyRequest, EmptyRequest__Output as _courses_EmptyRequest__Output } from './courses/EmptyRequest';
@@ -16,6 +16,7 @@ import type { UUID as _courses_UUID, UUID__Output as _courses_UUID__Output } fro
 import type { User as _courses_User, User__Output as _courses_User__Output } from './courses/User';
 import type { UserRegistrationRequest as _courses_UserRegistrationRequest, UserRegistrationRequest__Output as _courses_UserRegistrationRequest__Output } from './courses/UserRegistrationRequest';
 import type { UserRegistrationResponse as _courses_UserRegistrationResponse, UserRegistrationResponse__Output as _courses_UserRegistrationResponse__Output } from './courses/UserRegistrationResponse';
+import type { Venue as _courses_Venue, Venue__Output as _courses_Venue__Output } from './courses/Venue';
 import type { BoolValue as _google_protobuf_BoolValue, BoolValue__Output as _google_protobuf_BoolValue__Output } from './google/protobuf/BoolValue';
 import type { BytesValue as _google_protobuf_BytesValue, BytesValue__Output as _google_protobuf_BytesValue__Output } from './google/protobuf/BytesValue';
 import type { DoubleValue as _google_protobuf_DoubleValue, DoubleValue__Output as _google_protobuf_DoubleValue__Output } from './google/protobuf/DoubleValue';
@@ -37,6 +38,7 @@ export interface ProtoGrpcType {
     EmptyRequest: MessageTypeDefinition<_courses_EmptyRequest, _courses_EmptyRequest__Output>
     ErrorMessage: MessageTypeDefinition<_courses_ErrorMessage, _courses_ErrorMessage__Output>
     Event: MessageTypeDefinition<_courses_Event, _courses_Event__Output>
+    EventType: EnumTypeDefinition
     GetCurrentUserResponse: MessageTypeDefinition<_courses_GetCurrentUserResponse, _courses_GetCurrentUserResponse__Output>
     Host: MessageTypeDefinition<_courses_Host, _courses_Host__Output>
     ListEventsRequest: MessageTypeDefinition<_courses_ListEventsRequest, _courses_ListEventsRequest__Output>
@@ -48,6 +50,7 @@ export interface ProtoGrpcType {
     User: MessageTypeDefinition<_courses_User, _courses_User__Output>
     UserRegistrationRequest: MessageTypeDefinition<_courses_UserRegistrationRequest, _courses_UserRegistrationRequest__Output>
     UserRegistrationResponse: MessageTypeDefinition<_courses_UserRegistrationResponse, _courses_UserRegistrationResponse__Output>
+    Venue: MessageTypeDefinition<_courses_Venue, _courses_Venue__Output>
   }
   google: {
     protobuf: {

@@ -42,6 +42,7 @@
 		"@grpc/proto-loader": "^0.8.0",
 		"accept-language-parser": "^1.5.0",
 		"cbor2": "^2.0.1",
+		"dayjs": "^1.11.18",
 		"libsodium-wrappers": "^0.7.15",
 		"lucide-svelte": "^0.545.0",
 		"sveltekit-i18n": "^2.4.2",

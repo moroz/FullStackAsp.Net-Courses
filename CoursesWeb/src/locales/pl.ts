@@ -7,6 +7,11 @@ export default {
 			my_products: "Moje produkty",
 		},
 	},
+	hosts: {
+		salutation: {
+			dr: "Dr",
+		},
+	},
 	users: {
 		new: {
 			header: "Rejestracja",
@@ -32,6 +37,12 @@ export default {
 			password: "Hasło:",
 			submit: "Zaloguj się",
 			no_account_yet_html: `Nie masz jeszcze konta? <a href="{{path}}">Zarejestruj się</a>`,
+		},
+	},
+	events: {
+		event_type: {
+			Seminar: "Seminarium",
+			Webinar: "Webinar",
 		},
 	},
 };

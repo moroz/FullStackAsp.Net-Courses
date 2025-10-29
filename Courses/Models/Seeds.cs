@@ -21,12 +21,33 @@ public static class Seeds
 
         var modi = new Host
         {
-            Salutation = "Dr.",
+            Salutation = "common.hosts.salutation.dr",
             GivenName = "Sanjay",
             FamilyName = "Modi",
             ProfilePictureId = profilePicture.Id,
         };
         db.Add(modi);
+
+        var viennaHouse = new Venue
+        {
+            NameEn = "Vienna House Easy By Wyndham Cracow",
+            CityEn = "Cracow",
+            CityPl = "Kraków",
+            CountryCode = "PL",
+            Street = "ul. Przy Rondzie 2",
+        };
+        db.Add(viennaHouse);
+
+        var ior = new Venue
+        {
+            NameEn = "IOR Hotel",
+            NamePl = "Hotel IOR",
+            CityEn = "Poznań",
+            CountryCode = "PL",
+            Street = "ul. Węgorka 20",
+            PostalCode = "60-318"
+        };
+        db.Add(ior);
 
         List<Event> events =
         [
@@ -39,7 +60,7 @@ public static class Seeds
                 StartsAt = DateTime.Parse("2025-05-30T14:00:00Z").ToUniversalTime(),
                 EndsAt = DateTime.Parse("2025-05-31T08:00:00Z").ToUniversalTime(),
                 IsVirtual = true,
-                Venue = "Poznań, Hotel IOR"
+                Venue = ior,
             },
 
             new()
@@ -51,7 +72,7 @@ public static class Seeds
                 EndsAt = DateTime.Parse("2025-10-26T11:30:00Z").ToUniversalTime(),
                 DescriptionEn =
                     "Dr. Sanjay Modi, former professor of Mumbai Homeopathic College. The webinar is organised in honorary cooperation with the Polish Homeopathic Society and the Polish Society of Homeopathic Doctors and Pharmacists.\n\nOctober 24-25 2025, Vienna House Easy By Wyndham Cracow ul. Przy Rondzie 2, Kraków, Poland.\n\nOnline mode will also available (through Zoom). The lectures will be held in English with consecutive translation to Polish.",
-                Venue = "Kraków, Poland",
+                Venue = viennaHouse,
                 IsVirtual = true
             }
         ];

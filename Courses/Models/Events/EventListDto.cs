@@ -18,7 +18,7 @@ public class EventListDto
     public bool IsVirtual { get; set; }
     public required string DescriptionEn { get; set; }
     public required string DescriptionPl { get; set; }
-    public required string Venue { get; set; }
+    public Venue? Venue { get; set; }
 
     public Grpc.Event ToGrpcEvent()
     {
@@ -42,7 +42,7 @@ public class EventListDto
             IsVirtual = IsVirtual,
             DescriptionEn = DescriptionEn,
             DescriptionPl = DescriptionPl,
-            Venue = Venue,
+            Venue = Venue?.ToGrpcVenue(),
             Id = new UUID { Value = Id.ToString() },
             Hosts = { hosts }
         };
@@ -65,7 +65,7 @@ public static class EventListDtoSelect
             DescriptionEn = e.DescriptionEn,
             DescriptionPl = e.DescriptionPl ?? "",
             IsVirtual = e.IsVirtual,
-            Venue = e.Venue ?? "",
+            Venue = e.Venue,
             Hosts = e.EventHosts.OrderBy(eh => eh.Position).Select(eh => new
                 HostDto
                 {

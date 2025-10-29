@@ -4,6 +4,8 @@ import type { UUID as _courses_UUID, UUID__Output as _courses_UUID__Output } fro
 import type { StringValue as _google_protobuf_StringValue, StringValue__Output as _google_protobuf_StringValue__Output } from '../google/protobuf/StringValue';
 import type { Timestamp as _google_protobuf_Timestamp, Timestamp__Output as _google_protobuf_Timestamp__Output } from '../google/protobuf/Timestamp';
 import type { Host as _courses_Host, Host__Output as _courses_Host__Output } from '../courses/Host';
+import type { EventType as _courses_EventType, EventType__Output as _courses_EventType__Output } from '../courses/EventType';
+import type { Venue as _courses_Venue, Venue__Output as _courses_Venue__Output } from '../courses/Venue';
 
 export interface Event {
   'id'?: (_courses_UUID | null);
@@ -16,8 +18,10 @@ export interface Event {
   'descriptionEn'?: (string);
   'descriptionPl'?: (_google_protobuf_StringValue | null);
   'isVirtual'?: (boolean);
-  'venue'?: (_google_protobuf_StringValue | null);
   'hosts'?: (_courses_Host)[];
+  'eventType'?: (_courses_EventType);
+  'venue'?: (_courses_Venue | null);
+  '_venue'?: "venue";
 }
 
 export interface Event__Output {
@@ -31,6 +35,8 @@ export interface Event__Output {
   'descriptionEn': (string);
   'descriptionPl': (_google_protobuf_StringValue__Output | null);
   'isVirtual': (boolean);
-  'venue': (_google_protobuf_StringValue__Output | null);
   'hosts': (_courses_Host__Output)[];
+  'eventType': (_courses_EventType__Output);
+  'venue'?: (_courses_Venue__Output | null);
+  '_venue'?: "venue";
 }

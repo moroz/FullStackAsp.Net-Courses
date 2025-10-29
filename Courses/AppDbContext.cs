@@ -10,6 +10,7 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
     public DbSet<Models.Host> Hosts { get; set; }
     public DbSet<Models.User> Users { get; set; }
     public DbSet<Models.UserToken> UserTokens { get; set; }
+    public DbSet<Models.Venue> Venues { get; set; }
 
     public override int SaveChanges()
     {

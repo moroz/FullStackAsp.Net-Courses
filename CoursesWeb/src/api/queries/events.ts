@@ -1,6 +1,6 @@
 import { CoursesApiClient } from "../client";
 import { promisify } from "util";
-import { type Event } from "../interfaces";
+import { type Event, EventTypeValues, type EventType } from "../interfaces";
 import { timestampToISO } from "../helpers";
 
 export async function listEvents(): Promise<Event[]> {
@@ -13,7 +13,6 @@ export async function listEvents(): Promise<Event[]> {
 		id: e.id!.value,
 		titleEn: e.titleEn,
 		titlePl: e.titlePl?.value ?? null,
-		venue: e.venue?.value ?? null,
 		startsAt: timestampToISO(e.startsAt)!,
 		endsAt: timestampToISO(e.endsAt)!,
 		createdAt: timestampToISO(e.createdAt)!,
@@ -21,6 +20,7 @@ export async function listEvents(): Promise<Event[]> {
 		descriptionEn: e.descriptionEn,
 		descriptionPl: e.descriptionPl?.value ?? null,
 		isVirtual: e.isVirtual,
+		eventType: EventTypeValues[e.eventType as keyof typeof EventTypeValues] as EventType,
 		hosts: e.hosts.map((h) => ({
 			id: h.id!.value,
 			salutation: h.salutation ?? null,
@@ -30,5 +30,17 @@ export async function listEvents(): Promise<Event[]> {
 			createdAt: timestampToISO(h.createdAt)!,
 			updatedAt: timestampToISO(h.updatedAt)!,
 		})),
+		venue: e.venue
+			? {
+					id: e.venue.id!.value,
+					nameEn: e.venue.nameEn,
+					namePl: e.venue.namePl || null,
+					countryCode: e.venue.countryCode,
+					cityEn: e.venue.cityEn,
+					cityPl: e.venue.cityPl || null,
+					postalCode: e.venue.postalCode || null,
+					street: e.venue.street,
+				}
+			: null,
 	}));
 }

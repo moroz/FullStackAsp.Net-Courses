@@ -20,6 +20,9 @@ importers:
       cbor2:
         specifier: ^2.0.1
         version: 2.0.1
+      dayjs:
+        specifier: ^1.11.18
+        version: 1.11.18
       libsodium-wrappers:
         specifier: ^0.7.15
         version: 0.7.15
@@ -725,6 +728,9 @@ packages:
   cookie@0.6.0:
     resolution: {integrity: sha512-U71cyTamuh1CRNCfpGY6to28lxvNwPG4Guz/EVjgf3Jmzv0vlDp1atT9eS5dDjMYHucpHbWns6Lwf3BKz6svdw==}
     engines: {node: '>= 0.6'}
+
+  dayjs@1.11.18:
+    resolution: {integrity: sha512-zFBQ7WFRvVRhKcWoUh+ZA1g2HVgUbsZm9sbddh8EC5iv93sui8DVVz1Npvz+r6meo9VKfa8NyLWBsQK1VvIKPA==}
 
   debug@4.4.3:
     resolution: {integrity: sha512-RGwwWnwQvkVfavKVt22FGLw+xYSdzARwm0ru6DhTVA3umU5hZc28V3kO4stgYryrTlLpuvgI9GiijltAjNbcqA==}
@@ -1781,6 +1787,8 @@ snapshots:
   commondir@1.0.1: {}
 
   cookie@0.6.0: {}
+
+  dayjs@1.11.18: {}
 
   debug@4.4.3:
     dependencies:

@@ -34,9 +34,10 @@ message Event {
   string description_en = 8;
   google.protobuf.StringValue description_pl = 9;
   bool is_virtual = 10;
-  google.protobuf.StringValue venue = 11;
+  // google.protobuf.StringValue venue = 11;
   repeated Host hosts = 12;
   EventType event_type = 13;
+  optional Venue venue = 14;
 }
 
 message User {
@@ -63,6 +64,19 @@ message Host {
   google.protobuf.Timestamp created_at = 5;
   google.protobuf.Timestamp updated_at = 6;
   optional string profile_picture_url = 7;
+}
+
+message Venue {
+  UUID id = 1;
+  string name_en = 2;
+  optional string name_pl = 3;
+  string street = 4;
+  string city_en = 5;
+  optional string city_pl = 6;
+  optional string postal_code = 7;
+  string country_code = 8;
+  google.protobuf.Timestamp created_at = 9;
+  google.protobuf.Timestamp updated_at = 10;
 }
 
 // UUID message for ID representation
