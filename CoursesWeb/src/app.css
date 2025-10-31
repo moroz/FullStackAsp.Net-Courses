@@ -16,8 +16,17 @@
     --color-primary: var(--color-blue-900);
 
     --spacing-header: calc(70 / 4 * var(--spacing));
+
+    --breakpoint-2xl: 72rem;
+    --breakpoint-xl: 64rem;
+
+    --shadow-solid: 4px 4px 0px 0px black;
 }
 
 a:not([class]) {
     @apply text-primary-800 underline underline-offset-2 hover:text-primary-700 transform-content;
+}
+
+body {
+    @apply font-medium;
 }

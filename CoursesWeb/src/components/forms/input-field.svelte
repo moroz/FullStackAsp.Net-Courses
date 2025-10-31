@@ -54,8 +54,8 @@
 		aria-invalid={error ? "true" : undefined}
 		aria-describedby={describedBy}
 		class={twMerge(
-			"h-10 rounded-sm border border-slate-500 px-3 shadow-sm",
-			error && "border-red-500 focus-visible:outline-red-600",
+			"mt-1 h-10 rounded-sm border-2 px-2",
+			error && "border-red-700 focus-visible:outline-red-600",
 			className,
 		)}
 		{...rest}

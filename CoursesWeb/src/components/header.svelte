@@ -4,6 +4,7 @@
 	import type { User } from "@api/interfaces";
 	import DropdownToggle from "./header/dropdown-toggle.svelte";
 	import DropdownMenu from "./header/dropdown-menu.svelte";
+	import Button from "./button.svelte";
 
 	interface Props {
 		locale: LocaleCode;
@@ -28,7 +29,7 @@
 	}
 </script>
 
-<header class="fixed inset-0 bottom-[unset] z-10 h-header bg-slate-100 text-black shadow">
+<header class="fixed inset-0 bottom-[unset] z-10 h-header border-b-2 text-black">
 	<div class="container mx-auto flex h-full items-center justify-between">
 		<h1 class="text-4xl font-bold">
 			<a href="/" class="text-primary no-underline transition-colors hover:text-primary-800">
@@ -36,7 +37,7 @@
 			</a>
 		</h1>
 		<nav>
-			<ul class="flex gap-1 py-4">
+			<ul class="flex gap-2 py-4">
 				<li><LanguageSwitcher {locale} {pathname} class="navbar-item h-full uppercase" /></li>
 				<li><a href="/events" class="navbar-item">{$t("common.header.nav.events")}</a></li>
 				<li><a href="/videos" class="navbar-item">{$t("common.header.nav.videos")}</a></li>
@@ -57,11 +58,9 @@
 					</div>
 				{:else}
 					<li>
-						<a
-							href="/login"
-							class="ml-1 inline-flex h-full items-center justify-center rounded-sm border border-primary-900 px-4 font-semibold text-primary-900 transition-colors hover:bg-primary-100"
-							>{$t("common.header.nav.sign_in")}</a
-						>
+						<Button href="/login" class="">
+							{$t("common.header.nav.sign_in")}
+						</Button>
 					</li>
 				{/if}
 			</ul>

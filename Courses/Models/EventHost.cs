@@ -11,7 +11,7 @@ public class EventHost : IHasTimestamp
 {
     [Key] public Guid Id { get; set; } = Guid.CreateVersion7();
 
-    [ForeignKey("event_id")] public required Guid EventId { get; set; }
+    [ForeignKey("event_id")] public Guid EventId { get; set; }
     public Event Event { get; set; } = null!;
 
     [ForeignKey("host_id")] public Guid HostId { get; set; }

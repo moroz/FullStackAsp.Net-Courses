@@ -10,6 +10,6 @@
 	const { children, class: className }: Props = $props();
 </script>
 
-<div class={twMerge("rounded-sm border border-slate-300 bg-white p-6 shadow", className)}>
+<div class={twMerge("rounded-lg border-2 bg-white p-6", className)}>
 	{@render children?.()}
 </div>

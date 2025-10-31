@@ -1,9 +1,8 @@
 import i18n, { type Config } from "sveltekit-i18n";
-import { parse } from "accept-language-parser";
 
-export const DefaultLocale = "en-US";
-export type LocaleCode = "pl-PL" | "en-US";
-export const SupportedLocales = ["en-US", "pl-PL"] as const;
+export const DefaultLocale = "en-GB";
+export type LocaleCode = "pl-PL" | "en-GB";
+export const SupportedLocales = ["en-GB", "pl-PL"] as const;
 
 const config: Config = {
 	loaders: [
@@ -15,7 +14,7 @@ const config: Config = {
 			},
 		},
 		{
-			locale: "en-US",
+			locale: "en-GB",
 			key: "common",
 			loader: async () => {
 				return (await import("@/locales/en")).default;

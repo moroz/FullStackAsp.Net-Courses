@@ -10,7 +10,7 @@
 	}
 
 	const { locale, pathname, class: className, full }: Props = $props();
-	const otherLocale = locale === "pl-PL" ? "en-US" : "pl-PL";
+	const otherLocale = locale === "pl-PL" ? "en-GB" : "pl-PL";
 	const href = `${pathname}?lang=${otherLocale}`;
 	const title = new Intl.DisplayNames(otherLocale, { type: "language" }).of(
 		otherLocale.slice(0, 2),

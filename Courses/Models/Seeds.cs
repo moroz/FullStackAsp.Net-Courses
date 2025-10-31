@@ -26,7 +26,6 @@ public static class Seeds
             FamilyName = "Modi",
             ProfilePictureId = profilePicture.Id,
         };
-        db.Add(modi);
 
         var viennaHouse = new Venue
         {
@@ -36,7 +35,6 @@ public static class Seeds
             CountryCode = "PL",
             Street = "ul. Przy Rondzie 2",
         };
-        db.Add(viennaHouse);
 
         var ior = new Venue
         {
@@ -47,7 +45,6 @@ public static class Seeds
             Street = "ul. Węgorka 20",
             PostalCode = "60-318"
         };
-        db.Add(ior);
 
         List<Event> events =
         [
@@ -55,6 +52,7 @@ public static class Seeds
             {
                 Id = new Guid("0199c2f2-528b-7e88-96e3-5e5088333a8c"),
                 TitleEn = "To Perfect the Art of Homeopathy",
+				TitlePl = "Udoskonalić kunszt homeopatyczny",
                 DescriptionEn =
                     "Dr. Sanjay Modi, former professor of Mumbai Homeopathic College. The webinar is organised in honorary cooperation with the Polish Homeopathic Society and the Polish Society of Homeopathic Doctors and Pharmacists.",
                 StartsAt = DateTime.Parse("2025-05-30T14:00:00Z").ToUniversalTime(),
@@ -66,7 +64,7 @@ public static class Seeds
             new()
             {
                 Id = new Guid("0199c2fa-7e9d-72f6-ada1-88b5d04d9a58"),
-                TitleEn = "Perfect the Art of Homeopathy 2",
+                TitleEn = "To Perfect the Art of Homeopathy 2",
                 TitlePl = "Udoskonalić kunszt homeopatyczny 2",
                 StartsAt = DateTime.Parse("2025-10-24T14:00:00Z").ToUniversalTime(),
                 EndsAt = DateTime.Parse("2025-10-26T11:30:00Z").ToUniversalTime(),
@@ -81,8 +79,8 @@ public static class Seeds
         {
             new EventHost
             {
-                HostId = modi.Id,
-                EventId = events[0].Id,
+				Host = modi,
+                Event = events[0],
                 Position = 0
             }
         };
@@ -90,8 +88,8 @@ public static class Seeds
         {
             new EventHost
             {
-                HostId = modi.Id,
-                EventId = events[1].Id,
+                Host = modi,
+                Event = events[1],
                 Position = 0,
             }
         };

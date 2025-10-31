@@ -5,13 +5,11 @@ import { redirect } from "@sveltejs/kit";
 
 export const actions = {
 	signIn: async ({ locals, request, cookies }) => {
-		const formData = await request.formData();
-		const email = formData.get("email") as string;
-		const password = formData.get("password") as string;
+		const input = Object.fromEntries(await request.formData()) as Record<string, string>;
 
-		if (!email || !password) return;
+		if (!input.email || !input.password) return { success: false, input: { email: input.email } };
 
-		const result = await signInWithPassword(email, password);
+		const result = await signInWithPassword(input.email, input.password);
 
 		if (result?.success) {
 			const asUint8Array = new Uint8Array(result.accessToken!);
@@ -23,7 +21,7 @@ export const actions = {
 
 			return redirect(303, "/");
 		} else {
-			return { success: false, errors: result?.errors };
+			return { success: false, errors: result?.errors, input: { email: input.email } };
 		}
 	},
 	signOut: async ({ locals, cookies }) => {

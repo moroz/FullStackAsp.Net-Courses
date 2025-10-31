@@ -4,6 +4,7 @@
 	import InputField from "@components/forms/input-field.svelte";
 	import type { PageProps } from "./$types";
 	import type { ErrorMessage } from "@api/proto/courses/ErrorMessage";
+	import Button from "@components/button.svelte";
 
 	const { form }: PageProps = $props();
 
@@ -66,10 +67,7 @@
 		required
 	/>
 
-	<button
-		class="h-10 w-full cursor-pointer rounded-sm bg-primary-900 font-bold text-white transition-colors hover:bg-primary-800"
-		>{$t("common.users.new.submit")}</button
-	>
+	<Button type="submit" variant="primary">{$t("common.users.new.submit")}</Button>
 
 	<p class="text-center">
 		{@html $t("common.users.new.already_have_an_account_html", { path: "/login" })}

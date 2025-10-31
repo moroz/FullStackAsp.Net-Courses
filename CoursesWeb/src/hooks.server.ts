@@ -22,12 +22,18 @@ const resolveLocale: Handle = async ({ event, resolve }) => {
 		}) ??
 		DefaultLocale;
 
+	if (!SupportedLocales.includes(event.locals.locale)) {
+		event.locals.locale = DefaultLocale;
+	}
+
 	if (localeFromQueryString) {
 		event.locals.session.locale = localeFromQueryString;
 		await saveSession(event.locals.session, event.cookies).catch(console.error);
 	}
 
-	return resolve(event);
+	return resolve(event, {
+		transformPageChunk: ({ html }) => html.replace("%lang%", event.locals.locale),
+	});
 };
 
 const fetchCurrentUser: Handle = async ({ event, resolve }) => {

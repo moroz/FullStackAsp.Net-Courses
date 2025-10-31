@@ -2,6 +2,7 @@
 	import type { Event } from "@api/interfaces";
 	import { MapPin } from "lucide-svelte";
 	import { t, locale } from "$lib/translations";
+	import { formatDateRange } from "$lib/time-helpers";
 
 	interface Props {
 		event: Event;
@@ -20,10 +21,10 @@
 	});
 </script>
 
-<article class="flex justify-between bg-slate-100 p-6">
+<article class="flex justify-between rounded-lg border-2 bg-slate-100 p-6">
 	<header>
 		<div
-			class="mb-2 inline-flex items-center gap-1 rounded-lg bg-primary px-2 py-1 font-semibold text-white"
+			class="mb-2 inline-flex items-center gap-1 rounded border-2 border-black bg-white px-2 py-1 text-sm font-semibold text-primary"
 		>
 			<MapPin class="h-5 w-5" />
 			{#if venue && event.isVirtual}
@@ -43,13 +44,12 @@
 			{/if}
 		</h3>
 		<p>
-			{$t(`common.events.event_type.${event.eventType}`)}
+			{$t(`common.events.event_type.${event.eventType}`)},
+			{formatDateRange(event.startsAt, event.endsAt, $locale)}
 		</p>
 	</header>
 	{#each event.hosts as host}
-		<div
-			class="flex w-35 flex-col items-center overflow-hidden rounded-lg bg-primary text-white shadow outline"
-		>
+		<div class="flex w-35 flex-col items-center overflow-hidden rounded-lg border-2 bg-primary">
 			<div class="aspect-square overflow-hidden">
 				<img
 					src={host.profilePictureUrl}
@@ -57,7 +57,7 @@
 					alt="Profile picture of {host.salutation} {host.givenName} {host.familyName}"
 				/>
 			</div>
-			<footer class="flex h-10 items-center justify-center text-center">
+			<footer class="flex h-10 items-center justify-center text-center text-white">
 				<span
 					>{#if host.salutation}{$t(host.salutation, { default: host.salutation })}{/if}
 					<strong>{host.givenName} {host.familyName}</strong></span

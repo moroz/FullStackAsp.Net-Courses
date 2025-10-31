@@ -45,4 +45,10 @@ export default {
 			Webinar: "Webinar",
 		},
 	},
+	pages: {
+		home: {
+			title: "Strona główna",
+			heading: "Wydarzenia",
+		},
+	},
 };
