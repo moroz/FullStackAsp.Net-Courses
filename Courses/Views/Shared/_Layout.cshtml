@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Document</title>
+    <environment include="Development">
+        <!-- It's mandatory to use the full url for the Vite client script. -->
+        <script type="module" src="http://localhost:5173/@@vite/client"></script>
+        <script type="module" src="http://localhost:5173/src/main.ts"></script>
+    </environment>
+    <environment include="Production">
+        <script type="module" vite-src="~/main.ts" asp-append-version="true"></script>
+    </environment>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap"
+        rel="stylesheet"
+    />
+</head>
+<body>
+<partial name="_Header"/>
+@RenderBody()
+</body>
+</html>

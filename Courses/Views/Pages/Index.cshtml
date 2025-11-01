@@ -1,0 +1,27 @@
+@using System.Globalization
+@using Microsoft.AspNetCore.Mvc.Localization
+@model Courses.ViewModels.IndexViewModel
+@inject IViewLocalizer Localizer
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<div class="container mx-auto">
+    @Localizer["Events"]
+
+    @foreach (var e in Model.Events)
+    {
+        <article>
+            @if (CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "pl")
+            {
+                <h2>@e.TitlePl</h2>
+            }
+            else
+            {
+                <h2>@e.TitleEn</h2>
+            }
+        </article>
+    }
+</div>

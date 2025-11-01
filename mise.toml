@@ -2,6 +2,7 @@
 dotnet = "latest"
 node = "25.0.0"
 pnpm = "latest"
+prettier = "latest"
 
 [env]
 PGDATABASE = "courses_dev"

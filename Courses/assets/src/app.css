@@ -1,0 +1,34 @@
+@import "tailwindcss";
+
+@config "../tailwind.config.js";
+
+@theme {
+  --color-primary-50: var(--color-blue-50);
+  --color-primary-100: var(--color-blue-100);
+  --color-primary-200: var(--color-blue-200);
+  --color-primary-300: var(--color-blue-300);
+  --color-primary-400: var(--color-blue-400);
+  --color-primary-500: var(--color-blue-500);
+  --color-primary-600: var(--color-blue-600);
+  --color-primary-700: var(--color-blue-700);
+  --color-primary-800: var(--color-blue-800);
+  --color-primary-900: var(--color-blue-900);
+
+  --font-sans: "DM Sans", system-ui, sans-serif;
+  --color-primary: var(--color-blue-900);
+
+  --spacing-header: calc(70 / 4 * var(--spacing));
+
+  --breakpoint-2xl: 72rem;
+  --breakpoint-xl: 64rem;
+
+  --shadow-solid: 4px 4px 0px 0px black;
+}
+
+a:not([class]) {
+  @apply text-primary-800 underline underline-offset-2 hover:text-primary-700 transform-content;
+}
+
+body {
+  @apply font-medium;
+}
