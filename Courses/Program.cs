@@ -3,7 +3,6 @@ using Courses;
 using Courses.Middleware;
 using Courses.Models;
 using Courses.Repository;
-using Courses.Services;
 using FluentValidation;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
@@ -11,9 +10,6 @@ using Vite.AspNetCore;
 using TailwindMerge.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
-builder.Services.AddGrpc();
 
 builder.Services.AddScoped<EventRepository>();
 builder.Services.AddScoped<UserRepository>();

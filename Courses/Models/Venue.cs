@@ -1,6 +1,4 @@
 using System.ComponentModel.DataAnnotations;
-using Courses.Grpc;
-using Google.Protobuf.WellKnownTypes;
 
 namespace Courses.Models;
 
@@ -20,21 +18,4 @@ public class Venue : IHasTimestamp
 
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
-
-    public Grpc.Venue ToGrpcVenue()
-    {
-        return new Grpc.Venue
-        {
-            Id = new UUID { Value = Id.ToString() },
-            CityEn = CityEn,
-            CountryCode = CountryCode,
-            PostalCode = PostalCode ?? "",
-            Street = Street,
-            CityPl = CityPl ?? "",
-            NameEn = NameEn,
-            NamePl = NamePl ?? "",
-            CreatedAt = Timestamp.FromDateTime(CreatedAt),
-            UpdatedAt = Timestamp.FromDateTime(UpdatedAt)
-        };
-    }
 }

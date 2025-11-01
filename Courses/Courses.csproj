@@ -8,10 +8,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Protobuf Include="Protos\courses.proto" GrpcServices="Server;Client"/> <!-- Add ;Client -->
-    </ItemGroup>
-
-    <ItemGroup>
         <PackageReference Include="EFCore.NamingConventions" Version="9.0.0"/>
         <PackageReference Include="FluentValidation" Version="12.0.0"/>
         <PackageReference Include="Grpc.AspNetCore" Version="2.64.0"/>

@@ -1,7 +1,3 @@
-using Courses.Grpc;
-using Google.Protobuf.WellKnownTypes;
-using Decimal = Courses.Grpc.Decimal;
-
 namespace Courses.Models;
 
 // DTO -- Data Transfer Object
@@ -24,53 +20,6 @@ public class EventListDto
     public IEnumerable<EventPrice> Prices { get; set; } = [];
     public string? BasePriceCurrency { get; set; }
     public decimal? BasePriceAmount { get; set; }
-
-    public Grpc.Event ToGrpcEvent()
-    {
-        var hosts = Hosts.Select(h => new Grpc.Host
-        {
-            Id = new UUID { Value = h.Id.ToString() },
-            GivenName = h.GivenName,
-            FamilyName = h.FamilyName,
-            Salutation = h.Salutation,
-            ProfilePictureUrl = h.ProfilePictureUrl,
-        });
-
-        var prices = Prices.Select(p => new Grpc.EventPrice
-        {
-            Id = new UUID { Value = p.Id.ToString() },
-            PriceAmount = p.PriceAmount.ToGrpcDecimal(),
-            PriceCurrency = p.PriceCurrency,
-            PriceType = (Grpc.PriceType)p.PriceType,
-            Priority = p.Priority,
-            ValidUntil = p.ValidUntil != null ? Timestamp.FromDateTime((DateTime)p.ValidUntil) : null,
-            ValidFrom = p.ValidFrom != null ? Timestamp.FromDateTime((DateTime)p.ValidFrom) : null,
-            CreatedAt = Timestamp.FromDateTime(p.CreatedAt),
-            UpdatedAt = Timestamp.FromDateTime(p.UpdatedAt),
-            IsActive = p.IsActive,
-            RuleType = (Grpc.PriceRuleType)p.RuleType,
-        });
-
-        return new Grpc.Event
-        {
-            TitleEn = TitleEn,
-            TitlePl = TitlePl,
-            StartsAt = Timestamp.FromDateTime(StartsAt),
-            EndsAt = Timestamp.FromDateTime(EndsAt),
-            CreatedAt = Timestamp.FromDateTime(CreatedAt),
-            UpdatedAt = Timestamp.FromDateTime(UpdatedAt),
-            IsVirtual = IsVirtual,
-            DescriptionEn = DescriptionEn,
-            DescriptionPl = DescriptionPl,
-            Venue = Venue?.ToGrpcVenue(),
-            Id = new UUID { Value = Id.ToString() },
-            Prices = { prices },
-            Hosts = { hosts },
-            EventType = (Grpc.EventType)EventType,
-            BasePriceAmount = BasePriceAmount?.ToGrpcDecimal(),
-            BasePriceCurrency = BasePriceCurrency,
-        };
-    }
 }
 
 public static class EventListDtoSelect

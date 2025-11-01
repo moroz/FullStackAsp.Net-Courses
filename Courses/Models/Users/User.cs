@@ -1,8 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Net;
-using Courses.Grpc;
-using Google.Protobuf.WellKnownTypes;
 using Isopoh.Cryptography.Argon2;
 using Microsoft.EntityFrameworkCore;
 
@@ -46,25 +44,5 @@ public class User : IHasTimestamp
     public bool IsValidPassword(string password)
     {
         return Argon2.Verify(PasswordHash, password);
-    }
-
-    public Grpc.User ToGrpcUser()
-    {
-        return new Grpc.User
-        {
-            Id = new UUID { Value = Id.ToString(), },
-            Email = Email,
-            Company = Company ?? "",
-            Country = Country ?? "",
-            CreatedAt = Timestamp.FromDateTime(CreatedAt),
-            FamilyName = FamilyName,
-            GivenName = GivenName,
-            LastLoginAt = LastLoginAt == null ? null : Timestamp.FromDateTime((DateTime)LastLoginAt),
-            LastLoginIp = LastLoginIp?.ToString() ?? "",
-            Organization = Organization ?? "",
-            Profession = Profession ?? "",
-            Salutation = Salutation ?? "",
-            UpdatedAt = Timestamp.FromDateTime(UpdatedAt)
-        };
     }
 }
