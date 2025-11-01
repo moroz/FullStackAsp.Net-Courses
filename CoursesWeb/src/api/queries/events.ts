@@ -46,7 +46,8 @@ export async function listEvents(): Promise<Event[]> {
 			: null,
 		prices: e.prices.map((p) => ({
 			id: p.id!.value,
-			priceAmount: decodeDecimal(p.priceAmount)?.toString() ?? null,
+			priceAmount: decodeDecimal(p.priceAmount)!.toString(),
+			priceCurrency: p.priceCurrency,
 		})),
 	}));
 }

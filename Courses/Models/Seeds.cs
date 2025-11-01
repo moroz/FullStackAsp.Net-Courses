@@ -104,9 +104,10 @@ public static class Seeds
 
         var earlyBirdPrice = new EventPrice
         {
-            Event = events[0],
+            Event = events[1],
             PriceAmount = 560M,
             PriceCurrency = "PLN",
+            RuleType = PriceRuleType.EarlyBird,
             ValidUntil = DateTime.Parse("2025-09-20T23:59:59+02:00").ToUniversalTime(),
             Priority = 10,
         };
@@ -114,9 +115,11 @@ public static class Seeds
 
         var membershipPrice = new EventPrice
         {
-            Event = events[0],
+            Event = events[1],
             PriceAmount = 500M,
             PriceCurrency = "PLN",
+            RuleType = PriceRuleType.DiscountCode,
+            DiscountCode = "wshlif",
             Priority = 20,
         };
         db.Add(membershipPrice);

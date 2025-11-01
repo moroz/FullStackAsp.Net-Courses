@@ -53,6 +53,11 @@
 				{formatPrice(event.basePriceAmount, event.basePriceCurrency!, $locale)}
 			{/if}
 		</p>
+		<ul>
+			{#each event.prices as price}
+				<li>{formatPrice(price.priceAmount!, "PLN", $locale)}</li>
+			{/each}
+		</ul>
 	</header>
 	{#each event.hosts as host}
 		<div class="flex w-35 flex-col items-center overflow-hidden rounded-lg border-2 bg-primary">

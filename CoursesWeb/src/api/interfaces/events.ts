@@ -38,5 +38,6 @@ export interface Venue {
 
 export interface EventPrice {
 	id: ID;
-	priceAmount: string | null;
+	priceAmount: string;
+	priceCurrency: string;
 }

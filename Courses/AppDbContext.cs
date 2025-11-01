@@ -49,6 +49,8 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
                 // Early bird prices must have a valid_until date
                 t.HasCheckConstraint("event_price_early_bird_check",
                     "rule_type != 'early_bird' or valid_until is not null");
+                t.HasCheckConstraint("event_price_discount_code_check",
+                    "(discount_code is null) = (rule_type != 'discount_code')");
             });
     }
 

@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Courses.Models;
 
@@ -18,6 +19,7 @@ public enum PriceRuleType
     EarlyBird,
 }
 
+[Index(nameof(DiscountCode), nameof(EventId), IsUnique = true)]
 public class EventPrice : IHasTimestamp
 {
     public Guid Id { get; set; } = Guid.CreateVersion7();
@@ -30,6 +32,10 @@ public class EventPrice : IHasTimestamp
 
     [Column(TypeName = "decimal(20, 8)")] public decimal PriceAmount { get; set; }
     [StringLength(3)] public string PriceCurrency { get; set; } = "PLN";
+
+    [StringLength(255)]
+    [Column(TypeName = "citext")]
+    public string? DiscountCode { get; set; }
 
     public int Priority { get; set; } = 0;
     public bool IsActive { get; set; } = true;
