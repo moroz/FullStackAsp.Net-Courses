@@ -1,3 +1,4 @@
+import type Decimal from "decimal.js";
 import type { ID, ISOTimestamp } from "./common";
 import type { Host } from "./hosts";
 
@@ -19,6 +20,9 @@ export interface Event {
 	isVirtual: boolean;
 	hosts: Host[];
 	eventType: EventType;
+	prices: EventPrice[];
+	basePriceAmount: string | null;
+	basePriceCurrency: string | null;
 }
 
 export interface Venue {
@@ -30,4 +34,9 @@ export interface Venue {
 	cityPl: string | null;
 	postalCode: string | null;
 	street: string;
+}
+
+export interface EventPrice {
+	id: ID;
+	priceAmount: string | null;
 }

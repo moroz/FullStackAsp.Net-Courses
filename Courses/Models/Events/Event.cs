@@ -24,6 +24,9 @@ public class Event : IHasTimestamp
     public Venue? Venue { get; set; }
     public Guid? VenueId { get; set; }
 
+    public decimal? BasePriceAmount { get; set; }
+    [StringLength(3)] public string? BasePriceCurrency { get; set; }
+
     // ReSharper disable once EntityFramework.ModelValidation.UnlimitedStringLength
     [MaxLength] public required string DescriptionEn { get; set; }
 
@@ -32,6 +35,8 @@ public class Event : IHasTimestamp
 
     public List<EventHost> EventHosts { get; set; } = [];
     public List<Host> Hosts { get; } = [];
+
+    public List<EventPrice> Prices { get; } = [];
 
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;

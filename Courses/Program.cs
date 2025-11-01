@@ -20,8 +20,7 @@ builder.Services.AddScoped<UserTokenRepository>();
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
     options
-        .UseNpgsql(builder.Configuration.GetConnectionString("AppDbContext"),
-            optionsBuilder => { optionsBuilder.MapEnum<EventType>("event_type"); })
+        .UseNpgsql(builder.Configuration.GetConnectionString("AppDbContext"), AppDbContext.MapEnums)
         .UseSnakeCaseNamingConvention();
 });
 

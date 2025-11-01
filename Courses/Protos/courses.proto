@@ -38,6 +38,9 @@ message Event {
   repeated Host hosts = 12;
   EventType event_type = 13;
   optional Venue venue = 14;
+  repeated EventPrice prices = 15;
+  optional Decimal base_price_amount = 16;
+  google.protobuf.StringValue base_price_currency = 17;
 }
 
 message User {
@@ -79,6 +82,39 @@ message Venue {
   google.protobuf.Timestamp updated_at = 10;
 }
 
+enum PriceType {
+  Fixed = 0;
+  Percentage = 1;
+  DiscountFixed = 2;
+  DiscountPercentage = 3;
+}
+
+enum PriceRuleType {
+  Base = 0;
+  DiscountCode = 1;
+  EarlyBird = 2;
+}
+
+message Decimal {
+  optional uint64 lo = 1; // the first 64 bits of the underlying value
+  optional uint32 hi = 2; // the last 32 bis of the underlying value
+  optional sint32 signScale = 3; // the number of decimal digits, and the sign
+}
+
+message EventPrice {
+  UUID id = 1;
+  PriceType price_type = 2;
+  PriceRuleType rule_type = 3;
+  Decimal price_amount = 4;
+  string price_currency = 5;
+  int32 priority = 6;
+  bool is_active = 7;
+  optional google.protobuf.Timestamp valid_from = 8;
+  optional google.protobuf.Timestamp valid_until = 9;
+  google.protobuf.Timestamp created_at = 10;
+  google.protobuf.Timestamp updated_at = 11;
+}
+
 // UUID message for ID representation
 message UUID {
   string value = 1;
@@ -88,7 +124,6 @@ message ErrorMessage {
   string key = 1;
   string msg = 2;
 }
-
 
 message EmptyRequest {}
 

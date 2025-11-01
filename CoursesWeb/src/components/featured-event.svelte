@@ -3,6 +3,7 @@
 	import { MapPin } from "lucide-svelte";
 	import { t, locale } from "$lib/translations";
 	import { formatDateRange } from "$lib/time-helpers";
+	import { formatPrice } from "@/lib/money-helpers";
 
 	interface Props {
 		event: Event;
@@ -46,6 +47,11 @@
 		<p>
 			{$t(`common.events.event_type.${event.eventType}`)},
 			{formatDateRange(event.startsAt, event.endsAt, $locale)}
+		</p>
+		<p>
+			{#if event.basePriceAmount}
+				{formatPrice(event.basePriceAmount, event.basePriceCurrency!, $locale)}
+			{/if}
 		</p>
 	</header>
 	{#each event.hosts as host}

@@ -1,6 +1,5 @@
 import type { AnyDate, ISOTimestamp } from "@api/interfaces";
 import dayjs from "dayjs";
-import tz from "dayjs/plugin/timezone";
 
 export function normalizeDate(ts: AnyDate) {
 	return dayjs(ts).toDate();

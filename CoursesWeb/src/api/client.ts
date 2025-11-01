@@ -12,6 +12,7 @@ const packageDefinition = protoLoader.loadSync(ProtoPath, {
 	keepCase: false,
 	defaults: true,
 	oneofs: true,
+	longs: String,
 });
 
 const protoDescriptor = grpc.loadPackageDefinition(packageDefinition) as unknown as ProtoGrpcType;

@@ -2,9 +2,11 @@ import type * as grpc from '@grpc/grpc-js';
 import type { EnumTypeDefinition, MessageTypeDefinition } from '@grpc/proto-loader';
 
 import type { CoursesApiClient as _courses_CoursesApiClient, CoursesApiDefinition as _courses_CoursesApiDefinition } from './courses/CoursesApi';
+import type { Decimal as _courses_Decimal, Decimal__Output as _courses_Decimal__Output } from './courses/Decimal';
 import type { EmptyRequest as _courses_EmptyRequest, EmptyRequest__Output as _courses_EmptyRequest__Output } from './courses/EmptyRequest';
 import type { ErrorMessage as _courses_ErrorMessage, ErrorMessage__Output as _courses_ErrorMessage__Output } from './courses/ErrorMessage';
 import type { Event as _courses_Event, Event__Output as _courses_Event__Output } from './courses/Event';
+import type { EventPrice as _courses_EventPrice, EventPrice__Output as _courses_EventPrice__Output } from './courses/EventPrice';
 import type { GetCurrentUserResponse as _courses_GetCurrentUserResponse, GetCurrentUserResponse__Output as _courses_GetCurrentUserResponse__Output } from './courses/GetCurrentUserResponse';
 import type { Host as _courses_Host, Host__Output as _courses_Host__Output } from './courses/Host';
 import type { ListEventsRequest as _courses_ListEventsRequest, ListEventsRequest__Output as _courses_ListEventsRequest__Output } from './courses/ListEventsRequest';
@@ -35,14 +37,18 @@ type SubtypeConstructor<Constructor extends new (...args: any) => any, Subtype> 
 export interface ProtoGrpcType {
   courses: {
     CoursesApi: SubtypeConstructor<typeof grpc.Client, _courses_CoursesApiClient> & { service: _courses_CoursesApiDefinition }
+    Decimal: MessageTypeDefinition<_courses_Decimal, _courses_Decimal__Output>
     EmptyRequest: MessageTypeDefinition<_courses_EmptyRequest, _courses_EmptyRequest__Output>
     ErrorMessage: MessageTypeDefinition<_courses_ErrorMessage, _courses_ErrorMessage__Output>
     Event: MessageTypeDefinition<_courses_Event, _courses_Event__Output>
+    EventPrice: MessageTypeDefinition<_courses_EventPrice, _courses_EventPrice__Output>
     EventType: EnumTypeDefinition
     GetCurrentUserResponse: MessageTypeDefinition<_courses_GetCurrentUserResponse, _courses_GetCurrentUserResponse__Output>
     Host: MessageTypeDefinition<_courses_Host, _courses_Host__Output>
     ListEventsRequest: MessageTypeDefinition<_courses_ListEventsRequest, _courses_ListEventsRequest__Output>
     ListEventsResponse: MessageTypeDefinition<_courses_ListEventsResponse, _courses_ListEventsResponse__Output>
+    PriceRuleType: EnumTypeDefinition
+    PriceType: EnumTypeDefinition
     SignInResponse: MessageTypeDefinition<_courses_SignInResponse, _courses_SignInResponse__Output>
     SignInWithPasswordRequest: MessageTypeDefinition<_courses_SignInWithPasswordRequest, _courses_SignInWithPasswordRequest__Output>
     SignOutResponse: MessageTypeDefinition<_courses_SignOutResponse, _courses_SignOutResponse__Output>

@@ -1,7 +1,7 @@
 import { CoursesApiClient } from "../client";
 import { promisify } from "util";
 import { type Event, EventTypeValues, type EventType } from "../interfaces";
-import { timestampToISO } from "../helpers";
+import { decodeDecimal, timestampToISO } from "../helpers";
 
 export async function listEvents(): Promise<Event[]> {
 	const client = new CoursesApiClient();
@@ -21,6 +21,8 @@ export async function listEvents(): Promise<Event[]> {
 		descriptionPl: e.descriptionPl?.value ?? null,
 		isVirtual: e.isVirtual,
 		eventType: EventTypeValues[e.eventType as keyof typeof EventTypeValues] as EventType,
+		basePriceAmount: decodeDecimal(e.basePriceAmount ?? null)?.toString() ?? null,
+		basePriceCurrency: e.basePriceCurrency?.value || null,
 		hosts: e.hosts.map((h) => ({
 			id: h.id!.value,
 			salutation: h.salutation ?? null,
@@ -42,5 +44,9 @@ export async function listEvents(): Promise<Event[]> {
 					street: e.venue.street,
 				}
 			: null,
+		prices: e.prices.map((p) => ({
+			id: p.id!.value,
+			priceAmount: decodeDecimal(p.priceAmount)?.toString() ?? null,
+		})),
 	}));
 }

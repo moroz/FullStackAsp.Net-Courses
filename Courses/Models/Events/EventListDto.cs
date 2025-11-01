@@ -1,5 +1,6 @@
 using Courses.Grpc;
 using Google.Protobuf.WellKnownTypes;
+using Decimal = Courses.Grpc.Decimal;
 
 namespace Courses.Models;
 
@@ -9,6 +10,7 @@ public class EventListDto
     public Guid Id { get; set; }
     public required string TitleEn { get; set; }
     public required string TitlePl { get; set; }
+    public required EventType EventType { get; set; }
 
     public IEnumerable<HostDto> Hosts { get; set; } = [];
     public DateTime StartsAt { get; set; }
@@ -19,6 +21,9 @@ public class EventListDto
     public required string DescriptionEn { get; set; }
     public required string DescriptionPl { get; set; }
     public Venue? Venue { get; set; }
+    public IEnumerable<EventPrice> Prices { get; set; } = [];
+    public string? BasePriceCurrency { get; set; }
+    public decimal? BasePriceAmount { get; set; }
 
     public Grpc.Event ToGrpcEvent()
     {
@@ -29,6 +34,21 @@ public class EventListDto
             FamilyName = h.FamilyName,
             Salutation = h.Salutation,
             ProfilePictureUrl = h.ProfilePictureUrl,
+        });
+
+        var prices = Prices.Select(p => new Grpc.EventPrice
+        {
+            Id = new UUID { Value = p.Id.ToString() },
+            PriceAmount = p.PriceAmount.ToGrpcDecimal(),
+            PriceCurrency = p.PriceCurrency,
+            PriceType = (Grpc.PriceType)p.PriceType,
+            Priority = p.Priority,
+            ValidUntil = p.ValidUntil != null ? Timestamp.FromDateTime((DateTime)p.ValidUntil) : null,
+            ValidFrom = p.ValidFrom != null ? Timestamp.FromDateTime((DateTime)p.ValidFrom) : null,
+            CreatedAt = Timestamp.FromDateTime(p.CreatedAt),
+            UpdatedAt = Timestamp.FromDateTime(p.UpdatedAt),
+            IsActive = p.IsActive,
+            RuleType = (Grpc.PriceRuleType)p.RuleType,
         });
 
         return new Grpc.Event
@@ -44,7 +64,11 @@ public class EventListDto
             DescriptionPl = DescriptionPl,
             Venue = Venue?.ToGrpcVenue(),
             Id = new UUID { Value = Id.ToString() },
-            Hosts = { hosts }
+            Prices = { prices },
+            Hosts = { hosts },
+            EventType = (Grpc.EventType)EventType,
+            BasePriceAmount = BasePriceAmount?.ToGrpcDecimal(),
+            BasePriceCurrency = BasePriceCurrency,
         };
     }
 }
@@ -64,8 +88,12 @@ public static class EventListDtoSelect
             UpdatedAt = e.UpdatedAt,
             DescriptionEn = e.DescriptionEn,
             DescriptionPl = e.DescriptionPl ?? "",
+            EventType = e.EventType,
             IsVirtual = e.IsVirtual,
             Venue = e.Venue,
+            Prices = e.Prices,
+            BasePriceAmount = e.BasePriceAmount,
+            BasePriceCurrency = e.BasePriceCurrency,
             Hosts = e.EventHosts.OrderBy(eh => eh.Position).Select(eh => new
                 HostDto
                 {
