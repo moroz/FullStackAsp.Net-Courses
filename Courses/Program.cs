@@ -68,22 +68,22 @@ if (app.Environment.IsProduction())
     var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
     await db.Database.MigrateAsync();
 
-    app.UseExceptionHandler("/Home/Error");
+    // app.UseExceptionHandler("/Home/Error");
     app.UseHsts();
 }
 
+if (app.Environment.IsDevelopment())
+{
+    app.UseViteDevelopmentServer();
+}
+
 app.UseMiddleware<AuthenticationMiddleware>();
+app.UseStaticFiles();
 app.UseRouting();
 app.MapControllers();
-
-app.Run();
-
 app.MapStaticAssets();
 
-app.MapControllerRoute(
-        "default",
-        "{controller=Home}/{action=Index}/{id?}")
-    .WithStaticAssets();
+app.Run();
 
 public partial class Program
 {

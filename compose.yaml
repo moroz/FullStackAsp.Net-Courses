@@ -9,15 +9,6 @@ services:
       ConnectionStrings__AppDbContext: "Host=pg; Password=postgres; Username=postgres; Database=courses_prod"
       ASPNETCORE_ENVIRONMENT: Production
 
-  web:
-    build:
-      context: .
-      dockerfile: CoursesWeb/Dockerfile
-    ports:
-      - 3000:3000
-    environment:
-      BACKEND_URL: "backend:8080"
-
   pg:
     image: postgres:18
 

@@ -18,7 +18,6 @@ phases:
       - IMAGE_TAG=${COMMIT_HASH:=latest}
       - ECR_BASE_URI="$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com"
       - BACKEND_URI="$ECR_BASE_URI/homeosapiens-backend"
-      - WEB_URI="$ECR_BASE_URI/homeosapiens-web"
 
   build:
     commands:
@@ -26,16 +25,11 @@ phases:
       - echo Building Docker image for backend
       - docker build -t $BACKEND_URI:$IMAGE_TAG --cache-from $BACKEND_URI:$ENV --build-arg BUILDKIT_INLINE_CACHE=1 -f Courses/Dockerfile .
       - docker tag $BACKEND_URI:$IMAGE_TAG $BACKEND_URI:$ENV
-      - echo Building Docker image for Web
-      - docker build -t $WEB_URI:$IMAGE_TAG --cache-from $WEB_URI:$ENV --build-arg BUILDKIT_INLINE_CACHE=1 -f CoursesWeb/Dockerfile .
-      - docker tag $WEB_URI:$IMAGE_TAG $WEB_URI:$ENV
 
   post_build:
     commands:
       - docker push $BACKEND_URI:$IMAGE_TAG
       - docker push $BACKEND_URI:$ENV
-      - docker push $WEB_URI:$IMAGE_TAG
-      - docker push $WEB_URI:$ENV
 
 artifacts:
   files:

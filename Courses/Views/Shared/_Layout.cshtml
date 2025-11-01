@@ -7,10 +7,11 @@
     <environment include="Development">
         <!-- It's mandatory to use the full url for the Vite client script. -->
         <script type="module" src="http://localhost:5173/@@vite/client"></script>
-        <script type="module" src="http://localhost:5173/src/main.ts"></script>
+        <script type="module" vite-src="~/src/main.ts"></script>
     </environment>
     <environment include="Production">
-        <script type="module" vite-src="~/main.ts" asp-append-version="true"></script>
+        <link rel="stylesheet" vite-href="~/src/main.ts" asp-append-version="true"/>
+        <script type="module" vite-src="~/src/main.ts" asp-append-version="true"></script>
     </environment>
     <link rel="preconnect" href="https://fonts.googleapis.com"/>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
