@@ -3,16 +3,16 @@
 @config "../tailwind.config.js";
 
 @theme {
-  --color-primary-50: var(--color-blue-50);
-  --color-primary-100: var(--color-blue-100);
-  --color-primary-200: var(--color-blue-200);
-  --color-primary-300: var(--color-blue-300);
-  --color-primary-400: var(--color-blue-400);
-  --color-primary-500: var(--color-blue-500);
-  --color-primary-600: var(--color-blue-600);
-  --color-primary-700: var(--color-blue-700);
-  --color-primary-800: var(--color-blue-800);
-  --color-primary-900: var(--color-blue-900);
+  --color-primary-50: var(--color-indigo-50);
+  --color-primary-100: var(--color-indigo-100);
+  --color-primary-200: var(--color-indigo-200);
+  --color-primary-300: var(--color-indigo-300);
+  --color-primary-400: var(--color-indigo-400);
+  --color-primary-500: var(--color-indigo-500);
+  --color-primary-600: var(--color-indigo-600);
+  --color-primary-700: var(--color-indigo-700);
+  --color-primary-800: var(--color-indigo-800);
+  --color-primary-900: var(--color-indigo-900);
 
   --font-sans: "DM Sans", system-ui, sans-serif;
   --color-primary: var(--color-blue-900);
@@ -31,4 +31,36 @@ a:not([class]) {
 
 body {
   @apply font-medium;
+}
+
+@layer components {
+  :is(header.navbar) {
+    ul a {
+      @apply no-underline text-primary hover:text-primary-800;
+    }
+  }
+
+  .card {
+    @apply bg-white border-2 p-4 rounded-lg;
+  }
+
+  .input {
+    @apply bg-white border-2 rounded-sm h-10 w-80 p-2 focus-visible:outline-primary-600;
+  }
+
+  .field {
+    @apply grid;
+
+    label {
+      @apply font-semibold;
+    }
+  }
+
+  .button {
+    @apply border-2 h-10 border-black rounded-sm focus-visible:ring-2 ring-offset-2 ring-primary-600 focus-visible:outline-none;
+
+    &.primary {
+      @apply bg-indigo-700 text-white border-2 border-black;
+    }
+  }
 }

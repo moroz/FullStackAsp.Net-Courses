@@ -1,7 +1,24 @@
-<header class="border-b-2 h-header">
-    <div class="container mx-auto flex items-center h-full">
-        <h1 class="text-3xl font-bold"><a href="/"
-                                          class="no-underline text-primary hover:text-primary-800 transition-colors">Homeo
-                sapiens</a></h1>
+@inject IViewLocalizer Localizer
+
+<header class="border-b-2 h-header navbar">
+    <div class="container mx-auto flex items-center h-full justify-between">
+        <h1 class="text-4xl font-bold">
+            <a href="/" class="no-underline text-primary hover:text-primary-800 transition-colors">Homeo sapiens</a>
+        </h1>
+
+        <ul class="flex gap-4">
+            <li>
+                <a href="/events">@Localizer["header.nav.events"]</a>
+            </li>
+            <li>
+                <a href="/dashboard">@Localizer["header.nav.dashboard"]</a>
+            </li>
+            <li>
+                <a href="/watch">@Localizer["header.nav.watch"]</a>
+            </li>
+            <li>
+                <a href="/sign-in">@Localizer["header.nav.sign_in"]</a>
+            </li>
+        </ul>
     </div>
 </header>

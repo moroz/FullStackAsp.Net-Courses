@@ -29,4 +29,37 @@
         </Content>
     </ItemGroup>
 
+    <ItemGroup>
+        <EmbeddedResource Update="Resources\Views\Shared\_Header.en.resx">
+            <Generator>ResXFileCodeGenerator</Generator>
+            <LastGenOutput>_Header.cshtml.en-GB.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
+        <EmbeddedResource Update="Resources\Views\Shared\_Header.pl.resx">
+            <Generator>ResXFileCodeGenerator</Generator>
+            <LastGenOutput>_Header.pl.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
+        <EmbeddedResource Update="Resources\Views\Sessions\New.en.resx">
+            <Generator>ResXFileCodeGenerator</Generator>
+            <LastGenOutput>New.en.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Compile Update="Resources\Views\Shared\_Header.en.Designer.cs">
+            <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+            <DependentUpon>_Header.en.resx</DependentUpon>
+        </Compile>
+        <Compile Update="Resources\Views\Shared\_Header.pl.Designer.cs">
+            <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+            <DependentUpon>_Header.pl.resx</DependentUpon>
+        </Compile>
+        <Compile Update="Resources\Views\Sessions\New.en.Designer.cs">
+            <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+            <DependentUpon>New.en.resx</DependentUpon>
+        </Compile>
+    </ItemGroup>
+
 </Project>

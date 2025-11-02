@@ -1,5 +1,4 @@
 ﻿using System.Net;
-using Courses.Grpc;
 using Courses.Repository;
 using Grpc.Net.Client;
 using Microsoft.Extensions.DependencyInjection;
@@ -24,13 +23,5 @@ public class UnitTest1(GlobalTestFixture fixture) : DbTestBase(fixture)
         var client = Fixture.WebFactory.CreateDefaultClient();
         var response = await client.GetAsync("/");
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-    }
-
-    [Fact]
-    public async Task Test_GrpcClient()
-    {
-        var grpcClient = Fixture.ApiClient();
-        var actual = await grpcClient.ListEventsAsync(new ListEventsRequest());
-        Assert.NotEmpty(actual.Events);
     }
 }

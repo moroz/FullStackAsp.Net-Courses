@@ -42,14 +42,4 @@ public class GlobalTestFixture : IAsyncLifetime
         var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
         await Seeds.Run(db);
     }
-
-    public CoursesApi.CoursesApiClient ApiClient()
-    {
-        var client = WebFactory.CreateDefaultClient();
-        var channel = GrpcChannel.ForAddress(client.BaseAddress!, new GrpcChannelOptions
-        {
-            HttpClient = client,
-        });
-        return new CoursesApi.CoursesApiClient(channel);
-    }
 }

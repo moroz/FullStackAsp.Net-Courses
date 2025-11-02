@@ -1,0 +1,31 @@
+@model dynamic
+@inject IViewLocalizer Localizer
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Auth";
+}
+
+<form class="space-y-4" method="post">
+    <h2 class="text-center text-2xl font-bold">@Localizer["heading"]</h2>
+
+    <div class="field">
+        <label for="email">@Localizer["Email:"]</label>
+        <input type="text" class="input" autofocus id="email" name="email"/>
+    </div>
+
+    <div class="field">
+        <label for="password">@Localizer["Password:"]</label>
+        <input type="password" class="input" name="password" id="password"/>
+    </div>
+
+    <button type="submit" class="button primary w-full mb-0">
+        @Localizer["submit"]
+    </button>
+</form>
+
+<p>@Localizer["dont_have_an_account_html"]</p>
+
+<footer class="flex">
+
+</footer>

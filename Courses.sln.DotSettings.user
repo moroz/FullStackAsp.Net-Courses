@@ -18,4 +18,9 @@
     &lt;ProjectFile&gt;D7EB0B97-06A3-41D7-A795-FA1CE4906F83/d:Api/f:SignUpTest.cs&lt;/ProjectFile&gt;
   &lt;/Or&gt;
 &lt;/SessionState&gt;</s:String>
+	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=Courses_002FResources_002FViews_002FSessions_002FNew/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=Courses_002FResources_002FViews_002FShared_002F_005FHeader_002Ecshtml/@EntryIndexedValue">False</s:Boolean>
+	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=Courses_002FResources_002FViews_002FShared_002F_005FHeader_002Ecshtml/@EntryIndexRemoved">True</s:Boolean>
+	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=Courses_002FResources_002FViews_002FShared_002F_005FHeader/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/ResxEditorPersonal/Initialized/@EntryValue">True</s:Boolean>
 	</wpf:ResourceDictionary>

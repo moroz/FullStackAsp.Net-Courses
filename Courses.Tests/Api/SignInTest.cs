@@ -1,4 +1,3 @@
-using Courses.Grpc;
 using Courses.Repository;
 using Grpc.Core;
 using Microsoft.EntityFrameworkCore;
