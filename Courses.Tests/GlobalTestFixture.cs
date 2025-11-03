@@ -1,6 +1,4 @@
-using Courses.Grpc;
 using Courses.Models;
-using Grpc.Net.Client;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;

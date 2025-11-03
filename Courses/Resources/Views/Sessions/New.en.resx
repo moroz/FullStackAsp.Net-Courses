@@ -36,6 +36,6 @@
         <value>Sign in</value>
     </data>
     <data name="dont_have_an_account_html" xml:space="preserve">
-        <value>Don't have an account &lt;a href="/sign-up"&gt;Sign up&lt;/a&gt;</value>
+        <value>Don't have an account? &lt;a href="/sign-up"&gt;Sign up&lt;/a&gt;</value>
     </data>
 </root>

@@ -1,6 +1,5 @@
 ﻿using System.Net;
 using Courses.Repository;
-using Grpc.Net.Client;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Courses.Tests;
