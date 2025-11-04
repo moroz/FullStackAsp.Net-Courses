@@ -25,16 +25,3 @@ public static class HttpContextExtensions
         return null;
     }
 }
-
-public static class ServerCallContextExtensions
-{
-    public static User? GetCurrentUser(this ServerCallContext context)
-    {
-        return context.GetHttpContext().GetCurrentUser();
-    }
-
-    public static byte[]? GetCurrentAccessToken(this ServerCallContext context)
-    {
-        return context.GetHttpContext().GetCurrentAccessToken();
-    }
-}

@@ -3,6 +3,7 @@ using Courses;
 using Courses.Middleware;
 using Courses.Models;
 using Courses.Repository;
+using Courses.Services;
 using FluentValidation;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
@@ -22,6 +23,12 @@ builder.Services.AddDbContext<AppDbContext>(options =>
         .UseSnakeCaseNamingConvention();
 });
 
+builder.Services.AddSingleton<SessionService>(sp =>
+{
+    var config = sp.GetRequiredService<IConfiguration>();
+    var secretKeyBase = config["SecretKeyBase"];
+    return new SessionService(secretKeyBase!);
+});
 
 var supportedCultures = new[] { "en-GB", "pl-PL" };
 
@@ -30,6 +37,7 @@ builder.Services.Configure<RequestLocalizationOptions>(options =>
     options.DefaultRequestCulture = new RequestCulture("en-GB");
     options.SupportedCultures = supportedCultures.Select(c => new CultureInfo(c)).ToList();
     options.SupportedUICultures = supportedCultures.Select(c => new CultureInfo(c)).ToList();
+    options.RequestCultureProviders.Clear();
 });
 
 builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
@@ -73,7 +81,7 @@ if (app.Environment.IsDevelopment())
     app.UseViteDevelopmentServer();
 }
 
-app.UseMiddleware<AuthenticationMiddleware>();
+app.UseMiddleware<SessionMiddleware>();
 app.UseStaticFiles();
 app.UseRouting();
 app.MapControllers();
